@@ -24,7 +24,7 @@ We'll be sharing additional details and reflections on our journey on our respec
 ---
 
 <!-- TIME-TOGETHER:START -->
-We have been together for **11 years, 68 days, 8 hours, 15 minutes**.
+We have been together for **11 years, 68 days, 9 hours, 12 minutes**.
 
 Jeff is **27** years old, and Jacqueline is **26** years old.
 <!-- TIME-TOGETHER:END -->
