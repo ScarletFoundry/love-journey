@@ -13,17 +13,14 @@ END_MARKER     = "<!-- TIME-TOGETHER:END -->"
 SKIDDLE_BORN = datetime.date(1997, 8, 9)
 SCARLET_BORN = datetime.date(1998, 8, 4)
 
-AUTHORS = [
-    ("arcestia", "7936962+arcestia@users.noreply.github.com"),
-    ("scarletnine", "15015459+scarletnine@users.noreply.github.com"),
-]
-BRANCH         = "main" # Or your main branch name
+AUTHOR_NAME  = "skiddle-bot"
+AUTHOR_EMAIL = "165562787+skiddle-bot@users.noreply.github.com"
+BRANCH       = "main"
 # ──────────────────────────────────────────────────────────────────────────────
 
 def calculate_age(born_date: datetime.date, today: datetime.date) -> int:
-    """Calculates age based on birth date and current date."""
     age = today.year - born_date.year
-    if today.month < born_date.month or (today.month == born_date.month and today.day < born_date.day):
+    if (today.month, today.day) < (born_date.month, born_date.day):
         age -= 1
     return age
 
@@ -34,116 +31,107 @@ def format_duration(td: datetime.timedelta) -> str:
     hours = (total_minutes % (24 * 60)) // 60
     mins  = total_minutes % 60
     parts = []
-    if years:
-        parts.append(f"{years} year{'s' if years != 1 else ''}")
-    if days:
-        parts.append(f"{days} day{'s' if days != 1 else ''}")
-    if hours:
-        parts.append(f"{hours} hour{'s' if hours != 1 else ''}")
-    parts.append(f"{mins} minute{'s' if mins>1 else ''}")
+    if years: parts.append(f"{years} year{'s' if years != 1 else ''}")
+    if days: parts.append(f"{days} day{'s' if days != 1 else ''}")
+    if hours: parts.append(f"{hours} hour{'s' if hours != 1 else ''}")
+    parts.append(f"{mins} minute{'s' if mins != 1 else ''}")
     return ", ".join(parts)
 
-def build_dynamic_content(now: datetime.datetime) -> str:
+def build_dynamic_content(now: datetime.datetime) -> tuple[str, str]:
     td = now - START_DT
     duration = format_duration(td)
 
-    today_date = now.date()
-    skiddle_age = calculate_age(SKIDDLE_BORN, today_date)
-    scarlet_age = calculate_age(SCARLET_BORN, today_date)
+    today = now.date()
+    skiddle_age = calculate_age(SKIDDLE_BORN, today)
+    scarlet_age = calculate_age(SCARLET_BORN, today)
 
-    # The content to be inserted between the markers
     lines = [
         f"We have been together for **{duration}**.",
-        "", # Add a blank line for separation
+        "",
         f"Jeff is **{skiddle_age}** years old, and Jacqueline is **{scarlet_age}** years old."
     ]
 
-    # Add birthday note if current month is August
     if now.month == 8:
-        lines.append("") # Blank line before birthday note
+        lines.append("")
         lines.append("It's our birthday month! 🎉")
 
-    return "\n".join(lines) + "\n" # Ensure trailing newline
+    return "\n".join(lines) + "\n", duration
 
 def run_git_command(*args):
-    """Helper to run git commands and raise exception on error."""
     try:
         result = subprocess.run(['git', *args], capture_output=True, text=True, check=True)
-        print(f"Git command successful: git {' '.join(args)}")
-        if result.stdout:
-            print(result.stdout.strip())
-        if result.stderr:
-            print(result.stderr.strip())
+        if result.stdout.strip(): print(result.stdout.strip())
+        if result.stderr.strip(): print(result.stderr.strip())
     except subprocess.CalledProcessError as e:
-        print(f"Error running git command: git {' '.join(args)}")
-        print(f"Stderr: {e.stderr.strip()}")
-        print(f"Stdout: {e.stdout.strip()}")
+        print(f"Git error: {e.stderr.strip()}")
         raise
+
+def send_discord_success(duration: str):
+    webhook_url = os.environ.get("DISCORD_WEBHOOK")
+    if not webhook_url:
+        print("DISCORD_WEBHOOK not set. Skipping Discord notification.")
+        return
+
+    import json
+    import requests
+
+    payload = {
+        "embeds": [{
+            "title": "✅ README Updated",
+            "description": f"Skiddle and Scarletnine have been together for **{duration}**.",
+            "color": 15277667,
+            "fields": [
+                {"name": "Updated File", "value": README, "inline": True},
+                {"name": "Branch", "value": BRANCH, "inline": True},
+                {"name": "Time (UTC)", "value": datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}
+            ],
+            "footer": {"text": "Skiddle Bot | GitHub Actions"}
+        }]
+    }
+
+    try:
+        res = requests.post(webhook_url, json=payload, timeout=10)
+        res.raise_for_status()
+        print("✅ Discord notification sent.")
+    except Exception as e:
+        print(f"❌ Failed to send Discord notification: {e}")
 
 def main():
     now = datetime.datetime.utcnow()
-    dynamic_content = build_dynamic_content(now)
+    dynamic_content, duration = build_dynamic_content(now)
 
-    original_content = ""
-    if os.path.exists(README):
-        with open(README, "r", encoding="utf-8") as f:
-            original_content = f.read()
+    if not os.path.exists(README):
+        print(f"{README} not found.")
+        return
 
-    lines = original_content.splitlines(keepends=True)
+    with open(README, "r", encoding="utf-8") as f:
+        original = f.read()
 
-    start_index = -1
-    end_index = -1
-
-    # Find the marker lines
-    for i, line in enumerate(lines):
-        if START_MARKER in line:
-            start_index = i
-        if END_MARKER in line:
-            end_index = i
+    lines = original.splitlines(keepends=True)
+    start_index = next((i for i, l in enumerate(lines) if START_MARKER in l), -1)
+    end_index   = next((i for i, l in enumerate(lines) if END_MARKER in l), -1)
 
     if start_index == -1 or end_index == -1 or start_index >= end_index:
-        print(f"Markers '{START_MARKER}' and '{END_MARKER}' not found in order in {README}. Appending dynamic content.")
-        # If markers are not found, just append the dynamic content
-        new_content = original_content + dynamic_content
+        print("Markers not found properly. Appending content.")
+        updated = original + "\n" + START_MARKER + "\n" + dynamic_content + END_MARKER + "\n"
     else:
-        # Construct the new content
-        before_marker = "".join(lines[:start_index + 1])
-        after_marker = "".join(lines[end_index:])
-        new_content = before_marker + dynamic_content + after_marker
+        before = "".join(lines[:start_index + 1])
+        after  = "".join(lines[end_index:])
+        updated = before + dynamic_content + after
 
-    # Write the potentially updated content back to the file
-    with open(README, "w", encoding="utf-8") as f:
-        f.write(new_content)
+    if updated != original:
+        with open(README, "w", encoding="utf-8") as f:
+            f.write(updated)
 
-    # Check if the file content has actually changed
-    with open(README, "r", encoding="utf-8") as f:
-        current_content = f.read()
+        run_git_command("config", "user.name", AUTHOR_NAME)
+        run_git_command("config", "user.email", AUTHOR_EMAIL)
+        run_git_command("add", README)
+        run_git_command("commit", "-m", "chore: update time-together section in README [skip ci]")
+        run_git_command("push", "origin", f"HEAD:{BRANCH}")
 
-    if current_content != original_content:
-        print(f"{README} has been updated. Committing changes.")
-
-        # Determine the author/committer based on the current hour
-        author_index = now.hour % len(AUTHORS)
-        author_name, author_email = AUTHORS[author_index]
-
-        # Configure Git user
-        run_git_command('config', 'user.name', author_name)
-        run_git_command('config', 'user.email', author_email)
-
-        # Add the README.md file
-        run_git_command('add', README)
-
-        # Build the commit message
-        commit_message = f"chore: Update README with duration and ages [skip ci]"
-
-        # Commit the changes
-        run_git_command('commit', '--message', commit_message)
-
-        # Push the changes
-        run_git_command('push', 'origin', f'HEAD:{BRANCH}')
+        send_discord_success(duration)
     else:
-        print(f"{README} has no changes. No commit needed.")
-
+        print("No change detected. Nothing to commit.")
 
 if __name__ == "__main__":
     main()
