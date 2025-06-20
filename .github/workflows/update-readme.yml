@@ -2,7 +2,7 @@ name: "🕒 Update README"
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 * * * *'  # every hour
   workflow_dispatch:
 
 jobs:
@@ -23,11 +23,11 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies (if any)
-        run: echo "No Python dependencies needed."
+      - name: Install Python dependencies
+        run: pip install requests
 
       - name: Run update script and commit/push
-        run: |
-          python3 update_readme.py
+        run: python3 update_readme.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
