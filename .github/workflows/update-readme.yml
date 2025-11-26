@@ -2,7 +2,7 @@ name: "🕒 Update README"
 
 on:
   schedule:
-    - cron: '0 * * * *'  # every hour
+    - cron: '*/5 * * * *'  # every 5 minutes
   workflow_dispatch:
 
 jobs:
