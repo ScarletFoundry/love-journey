@@ -4,6 +4,10 @@
     "Jeff": "1997-08-09",
     "Jacqueline": "1999-08-04"
   },
+  "theme": {
+    "accent_color": "FF69B4",
+    "show_progress_bar": true
+  },
   "git_settings": {
     "author_name": "skiddle-bot",
     "author_email": "165562787+skiddle-bot@users.noreply.github.com",
@@ -18,7 +22,7 @@
     {"date": "Future", "event": "Building the future, one commit at a time."}
   ],
   "links": {
-    "Laurensius": "https://skiddle.id/",
-    "Jacqueline": "Coming Soon"
+    "Jeff": "https://skiddle.id",
+    "Jacqueline": "https://scarletnine.dev"
   }
 }
