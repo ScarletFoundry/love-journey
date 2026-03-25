@@ -16,7 +16,7 @@ timeline
     2020 : March: Thailand Lockdown: Navigating COVID-19 together 🏠
     2021 : January: Adopting our first puppy, Luna 🐶
     2022 : January: Welcoming Finn to the family 🐾
-    2024 : August: The Engagement 💍
+    2024 : August: The Engagement: Proposing to Jacqueline on her birthday 💍
     2026 : January: Paper Pulse: Combining ideas into music with AI assist 🎵
     Future : Building the future, one commit at a time.
 ```
@@ -31,7 +31,7 @@ timeline
 | 2020-03-01 | Thailand Lockdown: Navigating COVID-19 together 🏠 |
 | 2021-01-01 | Adopting our first puppy, Luna 🐶 |
 | 2022-01-01 | Welcoming Finn to the family 🐾 |
-| 2024-08-04 | The Engagement 💍 |
+| 2024-08-04 | The Engagement: Proposing to Jacqueline on her birthday 💍 |
 | 2026-01-11 | Paper Pulse: Combining ideas into music with AI assist 🎵 |
 | Future | Building the future, one commit at a time. |
 
