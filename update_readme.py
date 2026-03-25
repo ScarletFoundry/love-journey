@@ -205,9 +205,13 @@ def generate_readme_content(
         link = links.get(name, "#")
         skills = skills_data.get(name, [])
 
+        # Ensure color is a valid hex for CSS
+        clean_color = color.replace("#", "")
+        css_color = f"#{clean_color}"
+
         badges = " ".join(
             [
-                f"![{s}](https://img.shields.io/badge/-{s.replace(' ', '_')}-{color}?style=flat-square)"
+                f'<img src="https://img.shields.io/badge/-{s.replace(" ", "_")}-{clean_color}?style=flat-square" alt="{s}">'
                 for s in skills
             ]
         )
@@ -222,7 +226,7 @@ def generate_readme_content(
 <td width="50%" valign="top">
 <p align="center">
 <a href="https://github.com/{gh}">
-<img src="{avatar}" width="100" style="border-radius:50%; border: 3px solid #{color};" alt="{name}'s avatar">
+<img src="{avatar}" width="100" style="border-radius:50%; border: 3px solid {css_color};" alt="{name}'s avatar">
 </a>
 <br>
 <strong>{name}</strong>
@@ -234,12 +238,13 @@ def generate_readme_content(
 {badges}
 <br>
 <p align="center">
+<br>
 <a href="{link}"><b>Website</b></a> | <a href="https://github.com/{gh}"><b>GitHub</b></a>
 </p>
 </td>
 """
 
-    jeff_card = get_profile_card("Jeff", "blue")
+    jeff_card = get_profile_card("Jeff", "3498db")  # Use hex for blue
     jacq_card = get_profile_card("Jacqueline", accent)
 
     # Milestone logic for engagement
