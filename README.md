@@ -11,18 +11,20 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 timeline
     title Our Evolution
     2011 : The First Meeting (Middle School)
-    2014 : The Journey Begins 🥂
-    2019 : Navigating 5 years of Long Distance
-    2024 : The Engagement 💍
-    2026 : Paper Pulse
+    2014 : April: The First Kiss 💋 : April: The Journey Begins 🥂
+    2019 : June: Jacqueline moved to Bangkok for her education 📚 : December: Jeff moved to Thailand to be closer 🌏
+    2024 : August: The Engagement 💍
+    2026 : January: Paper Pulse: Combining ideas into music with AI assist 🎵
     Future : Building the future, one commit at a time.
 ```
 
 | Date | Event |
 | :--- | :--- |
 | 2011 | The First Meeting (Middle School) |
+| 2014-04-12 | The First Kiss 💋 |
 | 2014-04-14 | The Journey Begins 🥂 |
-| 2019 | Navigating 5 years of Long Distance |
+| 2019-06-01 | Jacqueline moved to Bangkok for her education 📚 |
+| 2019-12-01 | Jeff moved to Thailand to be closer 🌏 |
 | 2024-08-04 | The Engagement 💍 |
 | 2026-01-11 | Paper Pulse: Combining ideas into music with AI assist 🎵 |
 | Future | Building the future, one commit at a time. |
