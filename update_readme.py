@@ -11,7 +11,7 @@ END_MARKER     = "<!-- TIME-TOGETHER:END -->"
 
 # Birth dates
 SKIDDLE_BORN = datetime.date(1997, 8, 9)
-SCARLET_BORN = datetime.date(1998, 8, 4)
+SCARLET_BORN = datetime.date(1999, 8, 4)
 
 AUTHOR_NAME  = "skiddle-bot"
 AUTHOR_EMAIL = "165562787+skiddle-bot@users.noreply.github.com"
