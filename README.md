@@ -17,6 +17,7 @@ timeline
     2021 : January: Adopting our first puppy, Luna 🐶
     2022 : January: Welcoming Finn to the family 🐾
     2024 : August: The Engagement: Proposing to Jacqueline on her birthday 💍
+    2025 : June: A New Battle: Supporting Jacqueline through her cancer journey 🎗️
     2026 : January: Paper Pulse: Combining ideas into music with AI assist 🎵
     Future : Building the future, one commit at a time.
 ```
@@ -32,6 +33,7 @@ timeline
 | 2021-01-01 | Adopting our first puppy, Luna 🐶 |
 | 2022-01-01 | Welcoming Finn to the family 🐾 |
 | 2024-08-04 | The Engagement: Proposing to Jacqueline on her birthday 💍 |
+| 2025-06-01 | A New Battle: Supporting Jacqueline through her cancer journey 🎗️ |
 | 2026-01-11 | Paper Pulse: Combining ideas into music with AI assist 🎵 |
 | Future | Building the future, one commit at a time. |
 
