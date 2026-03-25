@@ -1,0 +1,24 @@
+{
+  "relationship_start": "2014-04-14T12:00:00Z",
+  "birthdays": {
+    "Jeff": "1997-08-09",
+    "Jacqueline": "1999-08-04"
+  },
+  "git_settings": {
+    "author_name": "skiddle-bot",
+    "author_email": "165562787+skiddle-bot@users.noreply.github.com",
+    "branch": "main"
+  },
+  "story": "For years, our love story unfolded quietly, a cherished bond known to our immediate families and, most importantly, to the two of us. Today, with full hearts, we are thrilled to share it more widely with the world.\n\nIt all started in middle school around 2011, where Laurensius Jeffrey Chandra (Skiddle) and Jacqueline Patravee (Scarletnine) first met. Though high school took us on different paths, our connection remained, and on April 14, 2014, we took the step to build something serious together.",
+  "milestones": [
+    {"date": "2011", "event": "The First Meeting (Middle School)"},
+    {"date": "2014-04-14", "event": "The Journey Begins 🥂"},
+    {"date": "2019", "event": "Navigating 5 years of Long Distance"},
+    {"date": "2024-08-04", "event": "The Engagement 💍"},
+    {"date": "Future", "event": "Building the future, one commit at a time."}
+  ],
+  "links": {
+    "Laurensius": "https://skiddle.id/",
+    "Jacqueline": "Coming Soon"
+  }
+}
