@@ -2,8 +2,13 @@ name: "🕒 Update README"
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # every 5 minutes
+    - cron: '*/15 * * * *'  # Changed to every 15 mins to reduce git noise
   workflow_dispatch:
+
+# Prevents multiple runs from overlapping if a push takes a while
+concurrency:
+  group: readme-update
+  cancel-in-progress: true
 
 jobs:
   update-readme:
@@ -13,21 +18,19 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Upgraded to v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+          # No cache needed since we have no dependencies
 
-      - name: Install Python dependencies
-        run: pip install requests
-
-      - name: Run update script and commit/push
+      - name: Run update script
         run: python3 update_readme.py
         env:
+          # The script uses these for the Discord notification and Git push
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
