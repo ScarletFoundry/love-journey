@@ -159,21 +159,90 @@ def generate_readme_content(
     duration_str = get_duration_stats(start_dt, now)
     progress_percent = get_anniversary_progress(start_dt, now)
 
-    # Components
-    milestones_list = [
-        f"| {m['date']} | {m['event']} |" for m in conf.get("milestones", [])
-    ]
+    # Milestones logic
+    milestones_data = conf.get("milestones", [])
+    milestones_list = [f"| {m['date']} | {m['event']} |" for m in milestones_data]
     milestones_str = "\n".join(milestones_list)
 
-    birthdays = conf.get("birthdays", {})
-    jeff_age = calculate_age(birthdays.get("Jeff", "1997-01-01"), today)
-    jacq_age = calculate_age(birthdays.get("Jacqueline", "1999-01-01"), today)
+    # Mermaid Timeline Logic
+    from collections import defaultdict
 
+    timeline_groups = defaultdict(list)
+    for m in milestones_data:
+        date_parts = m["date"].split("-")
+        year = date_parts[0]
+        event = m["event"].strip()
+        if len(date_parts) > 1:
+            try:
+                month_idx = int(date_parts[1])
+                month_name = calendar.month_name[month_idx]
+                event = f"{month_name}: {event}"
+            except (ValueError, IndexError):
+                pass
+        timeline_groups[year].append(event)
+    timeline_lines = []
+    for year, events in sorted(timeline_groups.items()):
+        events_str = " : ".join(events)
+        timeline_lines.append(f"    {year} : {events_str}")
+    mermaid_timeline = (
+        "```mermaid\ntimeline\n    title Our Evolution\n"
+        + "\n".join(timeline_lines)
+        + "\n```"
+    )
+
+    # Profile & Skill Logic
     theme = conf.get("theme", {})
     accent = theme.get("accent_color", "FF69B4")
+    profiles = conf.get("profiles", {})
+    skills_data = conf.get("skills", {})
+    links = conf.get("links", {})
+
+    def get_profile_card(name: str, color: str):
+        p = profiles.get(name, {})
+        gh = p.get("github", "")
+        note = p.get("note", "")
+        bio = p.get("bio", "")
+        link = links.get(name, "#")
+        skills = skills_data.get(name, [])
+
+        badges = " ".join(
+            [
+                f"![{s}](https://img.shields.io/badge/-{s.replace(' ', '_')}-{color}?style=flat-square)"
+                for s in skills
+            ]
+        )
+
+        avatar = (
+            f"https://github.com/{gh}.png?size=100"
+            if gh
+            else "https://github.com/identicons/default.png"
+        )
+
+        return f"""
+<td width="50%" valign="top">
+<p align="center">
+<a href="https://github.com/{gh}">
+<img src="{avatar}" width="100" style="border-radius:50%; border: 3px solid #{color};" alt="{name}'s avatar">
+</a>
+<br>
+<strong>{name}</strong>
+<br>
+<em>"{note}"</em>
+</p>
+{bio}
+<br><br>
+{badges}
+<br>
+<p align="center">
+<a href="{link}"><b>Website</b></a> | <a href="https://github.com/{gh}"><b>GitHub</b></a>
+</p>
+</td>
+"""
+
+    jeff_card = get_profile_card("Jeff", "blue")
+    jacq_card = get_profile_card("Jacqueline", accent)
 
     # Milestone logic for engagement
-    milestones_data = conf.get("milestones", [])
     engagement_str = next(
         (m["date"] for m in milestones_data if "Engagement" in m["event"]), None
     )
@@ -186,76 +255,15 @@ def generate_readme_content(
         except ValueError:
             pass
 
-    # Conditional Birthday Badge
-    birthday_badge = ""
-    if now.month == 8:
-        birthday_badge = f"![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-{accent}?style=flat-square)"
-
-    links = conf.get("links", {})
-    profiles = conf.get("profiles", {})
-    skills_data = conf.get("skills", {})
-
-    # Skills Badges logic
-    jeff_skills_list = skills_data.get("Jeff", [])
-    jacq_skills_list = skills_data.get("Jacqueline", [])
-
-    jeff_skills = " ".join(
-        [
-            f"![{s}](https://img.shields.io/badge/-{s.replace(' ', '_')}-blue?style=flat-square)"
-            for s in jeff_skills_list
-        ]
-    )
-    jacq_skills = " ".join(
-        [
-            f"![{s}](https://img.shields.io/badge/-{s.replace(' ', '_')}-{accent}?style=flat-square)"
-            for s in jacq_skills_list
-        ]
-    )
-
-    # Mermaid Timeline Logic
-    from collections import defaultdict
-
-    timeline_groups = defaultdict(list)
-
-    for m in milestones_data:
-        date_parts = m["date"].split("-")
-        year = date_parts[0]
-        event = m["event"].strip()
-
-        # If we have a month, prefix the event with it for better context
-        if len(date_parts) > 1:
-            try:
-                month_idx = int(date_parts[1])
-                month_name = calendar.month_name[month_idx]
-                event = f"{month_name}: {event}"
-            except (ValueError, IndexError):
-                pass
-
-        timeline_groups[year].append(event)
-
-    timeline_lines = []
-    for year, events in sorted(timeline_groups.items()):
-        # Join multiple events in the same year with Mermaid's 'section' syntax or line breaks
-        events_str = " : ".join(events)
-        timeline_lines.append(f"    {year} : {events_str}")
-
-    mermaid_timeline = (
-        "```mermaid\ntimeline\n    title Our Evolution\n"
-        + "\n".join(timeline_lines)
-        + "\n```"
-    )
-
     # Celebration Mode Logic
     celebration_banner = ""
-    # Anniversary Check
+    birthdays = conf.get("birthdays", {})
     if today.month == start_dt.month and today.day == start_dt.day:
         years_together = today.year - start_dt.year
         celebration_banner = (
             f"\n> ### 🎉 Happy {years_together}th Anniversary! Cheers to us! 🥂\n"
         )
         discord_msg = f"🎉 Happy {years_together}th Anniversary! 🥂 To many more beautiful years together!"
-
-    # Birthday Checks
     else:
         for name, bday_str in birthdays.items():
             bday = datetime.datetime.strptime(bday_str, "%Y-%m-%d").date()
@@ -264,7 +272,12 @@ def generate_readme_content(
                 celebration_banner = f"\n> ### 🎂 Happy Birthday, {name}! Wishing you a wonderful {age}th year! 🎉\n"
                 discord_msg = f"🎂 Happy Birthday, {name}! 🎉 Hope you have an amazing {age}th year!"
 
-    # Template
+    # Conditional Birthday Badge
+    birthday_badge = ""
+    if now.month == 8:
+        birthday_badge = f"![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-{accent}?style=flat-square)"
+
+    # Assemble Template
     content = f"""# Our Journey Begins...
 {celebration_banner}
 {conf.get("story", "")}
@@ -281,15 +294,12 @@ def generate_readme_content(
 ### 🎨 Paper Pulse
 In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
-#### 🧔 Jeff
-{profiles.get("Jeff", "Software Engineer.")}
-{jeff_skills}
-* [**Jeff's Blog**]({links.get("Jeff", "#")})
-
-#### 👩‍🎨 Jacqueline
-{profiles.get("Jacqueline", "Designer & Creative Developer.")}
-{jacq_skills}
-* [**Jacqueline's Blog**]({links.get("Jacqueline", "#")})
+<table width="100%">
+<tr>
+{jeff_card}
+{jacq_card}
+</tr>
+</table>
 
 ---
 
@@ -298,7 +308,7 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
 {get_progress_bar(progress_percent)}
 
 **Current Stats:**
-![Jeff](https://img.shields.io/badge/Jeff-{jeff_age}_y.o.-blue?style=flat-square) ![Jacqueline](https://img.shields.io/badge/Jacqueline-{jacq_age}_y.o.-{accent}?style=flat-square)
+![Jeff](https://img.shields.io/badge/Jeff-{calculate_age(birthdays.get("Jeff", "1997-01-01"), today)}_y.o.-blue?style=flat-square) ![Jacqueline](https://img.shields.io/badge/Jacqueline-{calculate_age(birthdays.get("Jacqueline", "1999-01-01"), today)}_y.o.-{accent}?style=flat-square)
 {engagement_badge}
 {birthday_badge}
 
@@ -313,7 +323,6 @@ def main():
 
     new_content, discord_msg = generate_readme_content(conf, now)
 
-    # Check if update is needed
     if README_PATH.exists():
         try:
             current_content = README_PATH.read_text(encoding=ENCODING)
@@ -323,30 +332,22 @@ def main():
         except UnicodeDecodeError:
             print("Existing README has unknown encoding, rewriting...", file=sys.stderr)
 
-    # Write new content
     README_PATH.write_text(new_content, encoding=ENCODING)
     print("README.md updated.")
 
-    # Only notify if the content actually changed (prevents spam on 15-min cron)
     if discord_msg:
         send_discord_notification(discord_msg)
 
-    # Git Operations
     git_conf = conf.get("git_settings")
     if git_conf:
         try:
-            # Configure git
             run_git(["config", "user.name", git_conf["author_name"]])
             run_git(["config", "user.email", git_conf["author_email"]])
-
-            # Commit and push
             run_git(["add", "README.md"])
             run_git(["commit", "-m", "chore: automated journey update [skip ci]"])
             run_git(["push", "origin", f"HEAD:{git_conf['branch']}"])
             print("Changes pushed to Git.")
         except Exception as e:
-            # Log but don't fail the script if git operations fail
-            # (e.g., if running locally without remote access)
             print(f"Git operations skipped or failed: {e}")
 
 

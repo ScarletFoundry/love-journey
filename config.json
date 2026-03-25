@@ -47,8 +47,16 @@
     "Jacqueline": "https://scarletnine.dev"
   },
   "profiles": {
-    "Jeff": "Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.",
-    "Jacqueline": "Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs."
+    "Jeff": {
+      "github": "skiddle-id",
+      "bio": "Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.",
+      "note": "Fighting & Creating"
+    },
+    "Jacqueline": {
+      "github": "scarletnine",
+      "bio": "Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs.",
+      "note": "Designing through the journey"
+    }
   },
   "skills": {
     "Jeff": ["AI", "Python", "Clean Code", "Logic"],
