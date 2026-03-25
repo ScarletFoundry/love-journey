@@ -11,7 +11,7 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 timeline
     title Our Evolution
     2011 : The First Meeting (Middle School)
-    2014 : April: The First Kiss 💋 : April: The Journey Begins 🥂
+    2014 : April: The Journey Begins 🥂
     2019 : June: Jacqueline moved to Bangkok for her education 📚 : December: Jeff moved to Thailand to be closer 🌏
     2020 : March: Thailand Lockdown: Navigating COVID-19 together 🏠
     2021 : January: Adopting our first puppy, Luna 🐶
@@ -25,7 +25,6 @@ timeline
 | Date | Event |
 | :--- | :--- |
 | 2011 | The First Meeting (Middle School) |
-| 2014-04-12 | The First Kiss 💋 |
 | 2014-04-14 | The Journey Begins 🥂 |
 | 2019-06-01 | Jacqueline moved to Bangkok for her education 📚 |
 | 2019-12-01 | Jeff moved to Thailand to be closer 🌏 |
@@ -40,15 +39,50 @@ timeline
 ### 🎨 Paper Pulse
 In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
-#### 🧔 Jeff
-Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
-![AI](https://img.shields.io/badge/-AI-blue?style=flat-square) ![Python](https://img.shields.io/badge/-Python-blue?style=flat-square) ![Clean Code](https://img.shields.io/badge/-Clean_Code-blue?style=flat-square) ![Logic](https://img.shields.io/badge/-Logic-blue?style=flat-square)
-* [**Jeff's Blog**](https://skiddle.id)
+<table width="100%">
+<tr>
 
-#### 👩‍🎨 Jacqueline
+<td width="50%" valign="top">
+<p align="center">
+<a href="https://github.com/skiddle-id">
+<img src="https://github.com/skiddle-id.png?size=100" width="100" style="border-radius:50%; border: 3px solid #blue;" alt="Jeff's avatar">
+</a>
+<br>
+<strong>Jeff</strong>
+<br>
+<em>"Fighting & Creating"</em>
+</p>
+Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
+<br><br>
+![AI](https://img.shields.io/badge/-AI-blue?style=flat-square) ![Python](https://img.shields.io/badge/-Python-blue?style=flat-square) ![Clean Code](https://img.shields.io/badge/-Clean_Code-blue?style=flat-square) ![Logic](https://img.shields.io/badge/-Logic-blue?style=flat-square)
+<br>
+<p align="center">
+<a href="https://skiddle.id"><b>Website</b></a> | <a href="https://github.com/skiddle-id"><b>GitHub</b></a>
+</p>
+</td>
+
+
+<td width="50%" valign="top">
+<p align="center">
+<a href="https://github.com/scarletnine">
+<img src="https://github.com/scarletnine.png?size=100" width="100" style="border-radius:50%; border: 3px solid #FF69B4;" alt="Jacqueline's avatar">
+</a>
+<br>
+<strong>Jacqueline</strong>
+<br>
+<em>"Designing through the journey"</em>
+</p>
 Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs.
+<br><br>
 ![Figma](https://img.shields.io/badge/-Figma-FF69B4?style=flat-square) ![Storytelling](https://img.shields.io/badge/-Storytelling-FF69B4?style=flat-square) ![Brand Design](https://img.shields.io/badge/-Brand_Design-FF69B4?style=flat-square) ![Public Relations](https://img.shields.io/badge/-Public_Relations-FF69B4?style=flat-square)
-* [**Jacqueline's Blog**](https://scarletnine.dev)
+<br>
+<p align="center">
+<a href="https://scarletnine.dev"><b>Website</b></a> | <a href="https://github.com/scarletnine"><b>GitHub</b></a>
+</p>
+</td>
+
+</tr>
+</table>
 
 ---
 
