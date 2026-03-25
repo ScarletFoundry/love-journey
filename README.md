@@ -17,7 +17,13 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 
 ### 🎨 Paper Pulse
 We are **Paper Pulse**, a creative duo focused on privacy, design, and software.
+
+#### 🧔 Jeff
+Software Engineer & Privacy Advocate. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
 * [**Jeff's Blog**](https://skiddle.id)
+
+#### 👩‍🎨 Jacqueline
+Designer & Creative Developer. Focused on crafting beautiful digital experiences and minimalist designs that tell a story.
 * [**Jacqueline's Blog**](https://scarletnine.dev)
 
 ---
@@ -31,4 +37,4 @@ We are **Paper Pulse**, a creative duo focused on privacy, design, and software.
 ![Age](https://img.shields.io/badge/Jacqueline_Age-26-FF69B4)
 
 
-*Last Updated: 2026-03-25 17:18 UTC*
+*Last Updated: 2026-03-25 17:19 UTC*
