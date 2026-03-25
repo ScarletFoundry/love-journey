@@ -13,10 +13,11 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 | 2014-04-14 | The Journey Begins 🥂 |
 | 2019 | Navigating 5 years of Long Distance |
 | 2024-08-04 | The Engagement 💍 |
+| 2026-01-11 | Paper Pulse: Combining ideas into music with AI assist 🎵 |
 | Future | Building the future, one commit at a time. |
 
 ### 🎨 Paper Pulse
-We are **Paper Pulse**, a creative duo focused on privacy, design, and software.
+In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
 #### 🧔 Jeff
 Software Engineer & Privacy Advocate. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
