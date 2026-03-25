@@ -15,14 +15,18 @@
   },
   "story": "For years, our love story unfolded quietly, a cherished bond known to our immediate families and, most importantly, to the two of us. Today, with full hearts, we are thrilled to share it more widely with the world.\n\nIt all started in middle school around 2011, where Laurensius Jeffrey Chandra (Skiddle) and Jacqueline Patravee (Scarletnine) first met. Though high school took us on different paths, our connection remained, and on April 14, 2014, we took the step to build something serious together.",
   "milestones": [
-    {"date": "2011", "event": "The First Meeting (Middle School)"},
-    {"date": "2014-04-14", "event": "The Journey Begins 🥂"},
-    {"date": "2019", "event": "Navigating 5 years of Long Distance"},
-    {"date": "2024-08-04", "event": "The Engagement 💍"},
-    {"date": "Future", "event": "Building the future, one commit at a time."}
+    { "date": "2011", "event": "The First Meeting (Middle School)" },
+    { "date": "2014-04-14", "event": "The Journey Begins 🥂" },
+    { "date": "2019", "event": "Navigating 5 years of Long Distance" },
+    { "date": "2024-08-04", "event": "The Engagement 💍" },
+    { "date": "Future", "event": "Building the future, one commit at a time." }
   ],
   "links": {
     "Jeff": "https://skiddle.id",
     "Jacqueline": "https://scarletnine.dev"
+  },
+  "profiles": {
+    "Jeff": "Software Engineer & Privacy Advocate. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.",
+    "Jacqueline": "Designer & Creative Developer. Focused on crafting beautiful digital experiences and minimalist designs that tell a story."
   }
 }
