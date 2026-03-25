@@ -213,15 +213,35 @@ def generate_readme_content(
     )
 
     # Mermaid Timeline Logic
-    timeline_items = []
+    from collections import defaultdict
+
+    timeline_groups = defaultdict(list)
+
     for m in milestones_data:
-        date_label = m["date"].split("-")[0]  # Year only for cleaner look
-        event_label = m["event"].split(":")[0].strip()  # Shorten if possible
-        timeline_items.append(f"    {date_label} : {event_label}")
+        date_parts = m["date"].split("-")
+        year = date_parts[0]
+        event = m["event"].strip()
+
+        # If we have a month, prefix the event with it for better context
+        if len(date_parts) > 1:
+            try:
+                month_idx = int(date_parts[1])
+                month_name = calendar.month_name[month_idx]
+                event = f"{month_name}: {event}"
+            except (ValueError, IndexError):
+                pass
+
+        timeline_groups[year].append(event)
+
+    timeline_lines = []
+    for year, events in sorted(timeline_groups.items()):
+        # Join multiple events in the same year with Mermaid's 'section' syntax or line breaks
+        events_str = " : ".join(events)
+        timeline_lines.append(f"    {year} : {events_str}")
 
     mermaid_timeline = (
         "```mermaid\ntimeline\n    title Our Evolution\n"
-        + "\n".join(timeline_items)
+        + "\n".join(timeline_lines)
         + "\n```"
     )
 

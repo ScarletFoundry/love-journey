@@ -17,8 +17,25 @@
   "milestones": [
     { "date": "2011", "event": "The First Meeting (Middle School)" },
     { "date": "2014-04-14", "event": "The Journey Begins 🥂" },
-    { "date": "2019", "event": "Navigating 5 years of Long Distance" },
-    { "date": "2024-08-04", "event": "The Engagement 💍" },
+    {
+      "date": "2019-06-01",
+      "event": "Jacqueline moved to Bangkok for her education 📚"
+    },
+    { "date": "2019-12-01", "event": "Jeff moved to Thailand to be closer 🌏" },
+    {
+      "date": "2020-03-01",
+      "event": "Thailand Lockdown: Navigating COVID-19 together 🏠"
+    },
+    { "date": "2021-01-01", "event": "Adopting our first puppy, Luna 🐶" },
+    { "date": "2022-01-01", "event": "Welcoming Finn to the family 🐾" },
+    {
+      "date": "2024-08-04",
+      "event": "The Engagement: Proposing to Jacqueline on her birthday 💍"
+    },
+    {
+      "date": "2025-06-01",
+      "event": "A New Battle: Supporting Jacqueline through her cancer journey 🎗️"
+    },
     {
       "date": "2026-01-11",
       "event": "Paper Pulse: Combining ideas into music with AI assist 🎵"
