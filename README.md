@@ -20,11 +20,11 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
 #### 🧔 Jeff
-Software Engineer & Privacy Advocate. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
+Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
 * [**Jeff's Blog**](https://skiddle.id)
 
 #### 👩‍🎨 Jacqueline
-Designer & Creative Developer. Focused on crafting beautiful digital experiences and minimalist designs that tell a story.
+Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs.
 * [**Jacqueline's Blog**](https://scarletnine.dev)
 
 ---
