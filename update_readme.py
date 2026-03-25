@@ -8,10 +8,12 @@ towards the next anniversary, and updates the markdown file with these details.
 import calendar
 import datetime
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Tuple
+from urllib import request
 
 # Constants
 CONFIG_PATH = Path("config.json")
@@ -112,6 +114,26 @@ def get_anniversary_progress(
     return days_passed / total_days
 
 
+def send_discord_notification(message: str) -> None:
+    """Sends a notification to Discord via Webhook."""
+    webhook_url = os.environ.get("DISCORD_WEBHOOK")
+    if not webhook_url:
+        return
+
+    data = json.dumps({"content": message}).encode(ENCODING)
+    req = request.Request(
+        webhook_url,
+        data=data,
+        headers={"Content-Type": "application/json", "User-Agent": "Mozilla/5.0"},
+    )
+    try:
+        with request.urlopen(req) as res:
+            if res.status != 204:
+                print(f"Discord notification status: {res.status}")
+    except Exception as e:
+        print(f"Failed to send Discord notification: {e}", file=sys.stderr)
+
+
 def load_config() -> Dict[str, Any]:
     """Loads configuration from JSON file."""
     if not CONFIG_PATH.exists():
@@ -120,9 +142,12 @@ def load_config() -> Dict[str, Any]:
     return json.loads(CONFIG_PATH.read_text(encoding=ENCODING))
 
 
-def generate_readme_content(conf: Dict[str, Any], now: datetime.datetime) -> str:
+def generate_readme_content(
+    conf: Dict[str, Any], now: datetime.datetime
+) -> Tuple[str, Optional[str]]:
     """Assembles the README content based on config and current stats."""
     today = now.date()
+    discord_msg = None
 
     # Parse start date
     # Handle 'Z' manually for compatibility
@@ -168,28 +193,82 @@ def generate_readme_content(conf: Dict[str, Any], now: datetime.datetime) -> str
 
     links = conf.get("links", {})
     profiles = conf.get("profiles", {})
+    skills_data = conf.get("skills", {})
+
+    # Skills Badges logic
+    jeff_skills_list = skills_data.get("Jeff", [])
+    jacq_skills_list = skills_data.get("Jacqueline", [])
+
+    jeff_skills = " ".join(
+        [
+            f"![{s}](https://img.shields.io/badge/-{s.replace(' ', '_')}-blue?style=flat-square)"
+            for s in jeff_skills_list
+        ]
+    )
+    jacq_skills = " ".join(
+        [
+            f"![{s}](https://img.shields.io/badge/-{s.replace(' ', '_')}-{accent}?style=flat-square)"
+            for s in jacq_skills_list
+        ]
+    )
+
+    # Mermaid Timeline Logic
+    timeline_items = []
+    for m in milestones_data:
+        date_label = m["date"].split("-")[0]  # Year only for cleaner look
+        event_label = m["event"].split(":")[0].strip()  # Shorten if possible
+        timeline_items.append(f"    {date_label} : {event_label}")
+
+    mermaid_timeline = (
+        "```mermaid\ntimeline\n    title Our Evolution\n"
+        + "\n".join(timeline_items)
+        + "\n```"
+    )
+
+    # Celebration Mode Logic
+    celebration_banner = ""
+    # Anniversary Check
+    if today.month == start_dt.month and today.day == start_dt.day:
+        years_together = today.year - start_dt.year
+        celebration_banner = (
+            f"\n> ### 🎉 Happy {years_together}th Anniversary! Cheers to us! 🥂\n"
+        )
+        discord_msg = f"🎉 Happy {years_together}th Anniversary! 🥂 To many more beautiful years together!"
+
+    # Birthday Checks
+    else:
+        for name, bday_str in birthdays.items():
+            bday = datetime.datetime.strptime(bday_str, "%Y-%m-%d").date()
+            if today.month == bday.month and today.day == bday.day:
+                age = calculate_age(bday_str, today)
+                celebration_banner = f"\n> ### 🎂 Happy Birthday, {name}! Wishing you a wonderful {age}th year! 🎉\n"
+                discord_msg = f"🎂 Happy Birthday, {name}! 🎉 Hope you have an amazing {age}th year!"
 
     # Template
     content = f"""# Our Journey Begins...
-
+{celebration_banner}
 {conf.get("story", "")}
 
 ---
 
 ### 🗓️ Milestones & Timeline
+{mermaid_timeline}
+
 | Date | Event |
 | :--- | :--- |
 {milestones_str}
 
 ### 🎨 Paper Pulse
-We are **Paper Pulse**, a creative duo focused on privacy, design, and software.
+In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
 #### 🧔 Jeff
 {profiles.get("Jeff", "Software Engineer.")}
+{jeff_skills}
 * [**Jeff's Blog**]({links.get("Jeff", "#")})
 
 #### 👩‍🎨 Jacqueline
 {profiles.get("Jacqueline", "Designer & Creative Developer.")}
+{jacq_skills}
 * [**Jacqueline's Blog**]({links.get("Jacqueline", "#")})
 
 ---
@@ -203,16 +282,16 @@ We are **Paper Pulse**, a creative duo focused on privacy, design, and software.
 {engagement_badge}
 {birthday_badge}
 
-*Last Updated: {now.strftime("%Y-%m-%d %H:%M")} UTC*
+*Last Updated: {now.strftime("%Y-%m-%d")} UTC*
 """
-    return content
+    return content, discord_msg
 
 
 def main():
     conf = load_config()
     now = datetime.datetime.now(datetime.timezone.utc)
 
-    new_content = generate_readme_content(conf, now)
+    new_content, discord_msg = generate_readme_content(conf, now)
 
     # Check if update is needed
     if README_PATH.exists():
@@ -227,6 +306,10 @@ def main():
     # Write new content
     README_PATH.write_text(new_content, encoding=ENCODING)
     print("README.md updated.")
+
+    # Only notify if the content actually changed (prevents spam on 15-min cron)
+    if discord_msg:
+        send_discord_notification(discord_msg)
 
     # Git Operations
     git_conf = conf.get("git_settings")

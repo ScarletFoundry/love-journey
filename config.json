@@ -19,6 +19,10 @@
     { "date": "2014-04-14", "event": "The Journey Begins 🥂" },
     { "date": "2019", "event": "Navigating 5 years of Long Distance" },
     { "date": "2024-08-04", "event": "The Engagement 💍" },
+    {
+      "date": "2026-01-11",
+      "event": "Paper Pulse: Combining ideas into music with AI assist 🎵"
+    },
     { "date": "Future", "event": "Building the future, one commit at a time." }
   ],
   "links": {
@@ -26,7 +30,11 @@
     "Jacqueline": "https://scarletnine.dev"
   },
   "profiles": {
-    "Jeff": "Software Engineer & Privacy Advocate. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.",
-    "Jacqueline": "Designer & Creative Developer. Focused on crafting beautiful digital experiences and minimalist designs that tell a story."
+    "Jeff": "Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.",
+    "Jacqueline": "Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs."
+  },
+  "skills": {
+    "Jeff": ["AI", "Python", "Clean Code", "Logic"],
+    "Jacqueline": ["Figma", "Storytelling", "Brand Design", "Public Relations"]
   }
 }
