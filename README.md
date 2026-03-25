@@ -45,7 +45,7 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
 <td width="50%" valign="top">
 <p align="center">
 <a href="https://github.com/skiddle-id">
-<img src="https://github.com/skiddle-id.png?size=100" width="100" style="border-radius:50%; border: 3px solid #blue;" alt="Jeff's avatar">
+<img src="https://github.com/skiddle-id.png?size=100" width="100" style="border-radius:50%; border: 3px solid #3498db;" alt="Jeff's avatar">
 </a>
 <br>
 <strong>Jeff</strong>
@@ -54,9 +54,10 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
 </p>
 Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
 <br><br>
-![AI](https://img.shields.io/badge/-AI-blue?style=flat-square) ![Python](https://img.shields.io/badge/-Python-blue?style=flat-square) ![Clean Code](https://img.shields.io/badge/-Clean_Code-blue?style=flat-square) ![Logic](https://img.shields.io/badge/-Logic-blue?style=flat-square)
+<img src="https://img.shields.io/badge/-AI-3498db?style=flat-square" alt="AI"> <img src="https://img.shields.io/badge/-Python-3498db?style=flat-square" alt="Python"> <img src="https://img.shields.io/badge/-Clean_Code-3498db?style=flat-square" alt="Clean Code"> <img src="https://img.shields.io/badge/-Logic-3498db?style=flat-square" alt="Logic">
 <br>
 <p align="center">
+<br>
 <a href="https://skiddle.id"><b>Website</b></a> | <a href="https://github.com/skiddle-id"><b>GitHub</b></a>
 </p>
 </td>
@@ -74,9 +75,10 @@ Developer with diverse knowledge of AI, Code, and Logic. Passionate about buildi
 </p>
 Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs.
 <br><br>
-![Figma](https://img.shields.io/badge/-Figma-FF69B4?style=flat-square) ![Storytelling](https://img.shields.io/badge/-Storytelling-FF69B4?style=flat-square) ![Brand Design](https://img.shields.io/badge/-Brand_Design-FF69B4?style=flat-square) ![Public Relations](https://img.shields.io/badge/-Public_Relations-FF69B4?style=flat-square)
+<img src="https://img.shields.io/badge/-Figma-FF69B4?style=flat-square" alt="Figma"> <img src="https://img.shields.io/badge/-Storytelling-FF69B4?style=flat-square" alt="Storytelling"> <img src="https://img.shields.io/badge/-Brand_Design-FF69B4?style=flat-square" alt="Brand Design"> <img src="https://img.shields.io/badge/-Public_Relations-FF69B4?style=flat-square" alt="Public Relations">
 <br>
 <p align="center">
+<br>
 <a href="https://scarletnine.dev"><b>Website</b></a> | <a href="https://github.com/scarletnine"><b>GitHub</b></a>
 </p>
 </td>
