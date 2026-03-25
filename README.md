@@ -33,8 +33,8 @@ Designer & Creative Developer. Focused on crafting beautiful digital experiences
 `██████████████████░░ 94.5%`
 
 **Current Stats:**
-![Age](https://img.shields.io/badge/Jeff_Age-28-blue)
-![Age](https://img.shields.io/badge/Jacqueline_Age-26-FF69B4)
+![Jeff](https://img.shields.io/badge/Jeff-28_y.o.-blue?style=flat-square) ![Jacqueline](https://img.shields.io/badge/Jacqueline-26_y.o.-FF69B4?style=flat-square)
+![Engaged](https://img.shields.io/badge/Engaged-598_days-gold?style=flat-square&logo=heart)
 
 
-*Last Updated: 2026-03-25 17:19 UTC*
+*Last Updated: 2026-03-25 17:20 UTC*
