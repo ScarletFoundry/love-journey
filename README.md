@@ -1,4 +1,4 @@
-# Our Journey Begins... and Now, We Share It.
+# Our Journey Begins...
 
 For years, our love story unfolded quietly, a cherished bond known to our immediate families and, most importantly, to the two of us. Today, with full hearts, we are thrilled to share it more widely with the world.
 
@@ -6,25 +6,29 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 
 ---
 
-### 🗓️ Our Milestones
-* **2011:** The First Meeting (Middle School)
-* **2014-04-14:** The Journey Begins 🥂
-* **2019:** Navigating 5 years of Long Distance
-* **2024-08-04:** The Engagement 💍
-* **Future:** Building the future, one commit at a time.
+### 🗓️ Milestones & Timeline
+| Date | Event |
+| :--- | :--- |
+| 2011 | The First Meeting (Middle School) |
+| 2014-04-14 | The Journey Begins 🥂 |
+| 2019 | Navigating 5 years of Long Distance |
+| 2024-08-04 | The Engagement 💍 |
+| Future | Building the future, one commit at a time. |
+
+### 🎨 Paper Pulse
+We are **Paper Pulse**, a creative duo focused on privacy, design, and software.
+* [**Jeff's Blog**](https://skiddle.id)
+* [**Jacqueline's Blog**](https://scarletnine.dev)
 
 ---
 
-### 🎨 Our Creative Duo: Paper Pulse
-When we aren't coding or managing homelabs, we collaborate as **Paper Pulse**, our shared creative outlet for design, games, and experiments.
+### 🕒 The Counter
+**We have been together for 11 years, 348 days.** Next Anniversary Progress:
+`██████████████████░░ 94.5%`
 
-### 📖 Read More About Our Journey
-* **Laurensius's Blog:** [https://skiddle.id/](https://skiddle.id/)
-* **Jacqueline's Blog:** *Coming Soon*
+**Current Stats:**
+![Age](https://img.shields.io/badge/Jeff_Age-28-blue)
+![Age](https://img.shields.io/badge/Jacqueline_Age-26-ff69b4)
 
----
 
-We have been together for **11 years, 348 days, 4 hours, 58 minutes**.
-
-Jeff is **28** years old, and Jacqueline is **26** years old.
-
+*Last Updated: 2026-03-25 17:09 UTC*
