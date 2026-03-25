@@ -4,36 +4,26 @@ import subprocess
 import os
 import json
 from pathlib import Path
-from urllib import request, error
+from urllib import request
 
-# ── CONFIG ────────────────────────────────────────────────────────────────────
-# The moment the journey began: April 14, 2014
-START_DT     = datetime.datetime(2014, 4, 14, 12, 0, 0, tzinfo=datetime.timezone.utc)
-README_PATH  = Path("README.md")
-START_MARKER = ""
-END_MARKER   = ""
+CONFIG_PATH = Path("config.json")
+README_PATH = Path("README.md")
 
-# Birthday config
-BIRTHDAYS = {
-    "Jeff": datetime.date(1997, 8, 9),
-    "Jacqueline": datetime.date(1999, 8, 4)
-}
+def run_git(*args):
+    subprocess.run(['git', *args], check=True, capture_output=True, text=True)
 
-AUTHOR_NAME  = "skiddle-bot"
-AUTHOR_EMAIL = "165562787+skiddle-bot@users.noreply.github.com"
-BRANCH       = "main"
-# ──────────────────────────────────────────────────────────────────────────────
+def calculate_age(born_str, today):
+    born = datetime.datetime.strptime(born_str, "%Y-%m-%d").date()
+    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
-def calculate_age(born_date: datetime.date, today: datetime.date) -> int:
-    return today.year - born_date.year - ((today.month, today.day) < (born_date.month, born_date.day))
-
-def format_duration(start: datetime.datetime, end: datetime.datetime) -> str:
+def format_duration(start_str, end):
+    start = datetime.datetime.fromisoformat(start_str.replace('Z', '+00:00'))
     diff = end - start
     years = diff.days // 365
     days = diff.days % 365
     hours, remainder = divmod(diff.seconds, 3600)
     minutes, _ = divmod(remainder, 60)
-
+    
     parts = []
     if years: parts.append(f"{years} year{'s' if years != 1 else ''}")
     if days: parts.append(f"{days} day{'s' if days != 1 else ''}")
@@ -41,84 +31,68 @@ def format_duration(start: datetime.datetime, end: datetime.datetime) -> str:
     parts.append(f"{minutes} minute{'s' if minutes != 1 else ''}")
     return ", ".join(parts)
 
-def build_dynamic_content(now: datetime.datetime) -> tuple[str, str]:
-    duration = format_duration(START_DT, now)
-    today = now.date()
-    
-    ages = [f"{name} is **{calculate_age(bd, today)}**" for name, bd in BIRTHDAYS.items()]
-    age_str = " years old, and ".join(ages) + " years old."
-
-    lines = [
-        f"We have been together for **{duration}**.",
-        "",
-        age_str
-    ]
-
-    if now.month == 8:
-        lines.extend(["", "It's our birthday month! 🎉"])
-
-    return "\n".join(lines) + "\n", duration
-
-def run_git(*args):
-    subprocess.run(['git', *args], check=True, capture_output=True, text=True)
-
-def send_discord_success(duration: str):
-    webhook_url = os.environ.get("DISCORD_WEBHOOK")
-    if not webhook_url: return
-
-    payload = {
-        "embeds": [{
-            "title": "✅ README Updated",
-            "description": f"Skiddle & Scarletnine: **{duration}**",
-            "color": 15277667,
-            "footer": {"text": "Skiddle Bot | GitHub Actions"}
-        }]
-    }
-
-    req = request.Request(
-        webhook_url, 
-        data=json.dumps(payload).encode('utf-8'),
-        headers={'Content-Type': 'application/json'}
-    )
-    
-    try:
-        with request.urlopen(req):
-            print("✅ Discord notification sent.")
-    except error.URLError as e:
-        print(f"❌ Discord failed: {e}")
-
 def main():
+    if not CONFIG_PATH.exists():
+        print("config.json not found!")
+        return
+
+    conf = json.loads(CONFIG_PATH.read_text())
     now = datetime.datetime.now(datetime.timezone.utc)
-    dynamic_content, duration = build_dynamic_content(now)
-
-    if not README_PATH.exists():
-        print("README.md not found.")
-        return
-
-    content = README_PATH.read_text(encoding="utf-8")
     
-    if START_MARKER not in content or END_MARKER not in content:
-        print("Markers not found in README.md. Skipping update.")
+    # 1. Process Stats
+    duration = format_duration(conf['relationship_start'], now)
+    ages = [f"{name} is **{calculate_age(date, now.date())}**" for name, date in conf['birthdays'].items()]
+    age_line = " years old, and ".join(ages) + " years old."
+
+    # 2. Process Milestones
+    milestone_lines = [f"* **{m['date']}:** {m['event']}" for m in conf['milestones']]
+    milestone_text = "\n".join(milestone_lines)
+
+    # 3. Assemble README
+    readme_content = f"""# Our Journey Begins... and Now, We Share It.
+
+{conf['story']}
+
+---
+
+### 🗓️ Our Milestones
+{milestone_text}
+
+---
+
+### 🎨 Our Creative Duo: Paper Pulse
+When we aren't coding or managing homelabs, we collaborate as **Paper Pulse**, our shared creative outlet for design, games, and experiments.
+
+### 📖 Read More About Our Journey
+* **Laurensius's Blog:** [{conf['links']['Laurensius']}]({conf['links']['Laurensius']})
+* **Jacqueline's Blog:** *{conf['links']['Jacqueline']}*
+
+---
+
+We have been together for **{duration}**.
+
+{age_line}
+{"" if now.month != 8 else "It's our birthday month! 🎉"}
+"""
+
+    # 4. Check & Update
+    if README_PATH.exists() and README_PATH.read_text() == readme_content:
+        print("No changes needed.")
         return
 
-    # Surgical replacement using string partitioning
-    prefix, _, rest = content.partition(START_MARKER)
-    _, _, suffix = rest.partition(END_MARKER)
-    new_content = f"{prefix}{START_MARKER}\n{dynamic_content}{END_MARKER}{suffix}"
-
-    if new_content != content:
-        README_PATH.write_text(new_content, encoding="utf-8")
-        try:
-            run_git("config", "user.name", AUTHOR_NAME)
-            run_git("config", "user.email", AUTHOR_EMAIL)
-            run_git("add", str(README_PATH))
-            run_git("commit", "-m", "chore: update time-together section [skip ci]")
-            run_git("push", "origin", f"HEAD:{BRANCH}")
-            send_discord_success(duration)
-        except subprocess.CalledProcessError as e:
-            print(f"Git failed: {e.stderr}")
-    else:
-        print("No changes needed.")
+    README_PATH.write_text(readme_content)
+    
+    # 5. Git Push
+    git = conf['git_settings']
+    try:
+        run_git("config", "user.name", git['author_name'])
+        run_git("config", "user.email", git['author_email'])
+        run_git("add", "README.md")
+        run_git("commit", "-m", "chore: update journey stats [skip ci]")
+        run_git("push", "origin", f"HEAD:{git['branch']}")
+        print("Successfully updated README and pushed.")
+    except Exception as e:
+        print(f"Git failed: {e}")
 
 if __name__ == "__main__":
     main()
