@@ -23,12 +23,12 @@ We are **Paper Pulse**, a creative duo focused on privacy, design, and software.
 ---
 
 ### 🕒 The Counter
-**We have been together for 11 years, 345 days.** Next Anniversary Progress:
+**We have been together for 11 years, 11 months, 11 days.** Next Anniversary Progress:
 `██████████████████░░ 94.5%`
 
 **Current Stats:**
 ![Age](https://img.shields.io/badge/Jeff_Age-28-blue)
-![Age](https://img.shields.io/badge/Jacqueline_Age-26-ff69b4)
+![Age](https://img.shields.io/badge/Jacqueline_Age-26-FF69B4)
 
 
-*Last Updated: 2026-03-25 17:17 UTC*
+*Last Updated: 2026-03-25 17:18 UTC*
