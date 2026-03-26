@@ -28,6 +28,11 @@
           "hashtags": ["lovejourney", "guardianlog"]
         }
       ]
+    },
+    "guestbook": {
+      "enabled": true,
+      "issue_id": 1,
+      "limit": 10
     }
   },
   "theme": {

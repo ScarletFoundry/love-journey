@@ -163,6 +163,7 @@ def main():
             conf["bluesky_actor_posts"] = all_posts
 
     # 1.2 Load remote configs if enabled
+    # 1.2 Load remote configs if enabled
     if global_settings.get("remote_config_enabled"):
         remote_urls = global_settings.get("remote_config_urls", [])
         for url in remote_urls:
@@ -275,6 +276,7 @@ def main():
                 if DOCS_DIR.exists():
                     run_git(["add", "docs/"])
 
+                # Create a descriptive commit message based on what changed
                 commit_msg = "chore: automated journey update 🕒 [skip ci]"
                 if "HEALTH.md" in status:
                     commit_msg = "chore: automated health status update 🎗️ [skip ci]"

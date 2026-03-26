@@ -1,0 +1,41 @@
+name: "❤️ Update Guestbook"
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+  workflow_dispatch:
+  # Optional: Trigger when a new comment is added to the guestbook issue
+  issue_comment:
+    types: [created, edited, deleted]
+
+# Prevents multiple runs from overlapping
+concurrency:
+  group: guestbook-update
+  cancel-in-progress: true
+
+jobs:
+  update-guestbook:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    # If triggered by issue_comment, only run if it's the specific guestbook issue
+    # You can uncomment and replace ISSUE_NUMBER with your guestbook issue ID
+    # if: github.event_name != 'issue_comment' || github.event.issue.number == ISSUE_NUMBER
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run guestbook script
+        run: python3 scripts/update_guestbook.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
