@@ -12,7 +12,12 @@
     "remote_config_urls": [
       "https://cdn.skiddle.id/love-journey/health.json",
       "https://cdn.skiddle.id/love-journey/paper_pulse.json"
-    ]
+    ],
+    "bluesky_integration": {
+      "enabled": true,
+      "handle": "scarletnine.bsky.social",
+      "show_in_files": ["HEALTH.md", "README.md"]
+    }
   },
   "theme": {
     "accent_color": "FF69B4",
