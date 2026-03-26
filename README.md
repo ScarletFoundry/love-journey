@@ -36,6 +36,8 @@ timeline
 | 2026-01-11 | Paper Pulse: Combining ideas into music with AI assist 🎵 |
 | Future | Building the future, one commit at a time. |
 
+---
+
 ### 🎨 Paper Pulse
 In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
