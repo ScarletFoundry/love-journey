@@ -31,6 +31,18 @@ def validate_config(conf: Dict[str, Any]) -> bool:
     if missing:
         print(f"::error::Missing required config keys: {', '.join(missing)}")
         return False
+
+    # Ensure date format is valid
+    try:
+        datetime.datetime.fromisoformat(
+            conf["relationship_start"].replace("Z", "+00:00")
+        )
+    except ValueError:
+        print(
+            f"::error::Invalid relationship_start format: {conf['relationship_start']}"
+        )
+        return False
+
     return True
 
 
@@ -248,11 +260,17 @@ def main():
             author_email = git_conf.get("author_email", "bot@skiddle.id")
             branch = git_conf.get("branch", "main")
 
+            # Check for changes across all tracked and untracked files in relevant paths
+            run_git(["add", "-N", "README.md"])
+            if DOCS_DIR.exists():
+                run_git(["add", "-N", "docs/"])
+
             status = os.popen("git status --porcelain README.md docs/").read().strip()
             if status:
                 print(f"Committing changes as {author_name}...")
                 run_git(["config", "user.name", author_name])
                 run_git(["config", "user.email", author_email])
+
                 run_git(["add", "README.md"])
                 if DOCS_DIR.exists():
                     run_git(["add", "docs/"])
