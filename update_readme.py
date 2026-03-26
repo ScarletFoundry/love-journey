@@ -112,23 +112,34 @@ def main():
             author_email = git_conf.get("author_email", "bot@skiddle.id")
             branch = git_conf.get("branch", "main")
 
-            print(f"Committing changes as {author_name}...")
-            run_git(["config", "user.name", author_name])
-            run_git(["config", "user.email", author_email])
+            # Check for changes across the root and docs directory
+            # This ensures we only run git config and commit if something actually changed
+            status = os.popen("git status --porcelain README.md docs/").read().strip()
 
-            # Add all updated files and docs directory
-            run_git(["add", "README.md"])
-            if DOCS_DIR.exists():
-                run_git(["add", str(DOCS_DIR)])
-
-            # Check if there are staged changes before committing
-            status = os.popen("git status --porcelain").read()
             if status:
-                run_git(["commit", "-m", "chore: automated journey update [skip ci]"])
+                print(f"Changes detected. Committing as {author_name}...")
+                run_git(["config", "user.name", author_name])
+                run_git(["config", "user.email", author_email])
+
+                # Stage README and the entire docs directory
+                run_git(["add", "README.md"])
+                if DOCS_DIR.exists():
+                    run_git(["add", "docs/"])
+
+                # Create a descriptive commit message based on what changed
+                commit_msg = "chore: automated journey update 🕒 [skip ci]"
+                if "HEALTH.md" in status:
+                    commit_msg = "chore: automated health status update 🎗️ [skip ci]"
+                elif "PAPER_PULSE.md" in status:
+                    commit_msg = "chore: automated music update 🎵 [skip ci]"
+
+                run_git(["commit", "-m", commit_msg])
                 run_git(["push", "origin", f"HEAD:{branch}"])
-                print("Changes pushed to Git.")
+                print(f"Changes pushed to {branch} successfully.")
             else:
-                print("No changes to commit.")
+                print(
+                    "No changes detected in README.md or docs/. Skipping git operations."
+                )
 
         except Exception as e:
             print(f"Git operations failed: {e}", file=sys.stderr)
