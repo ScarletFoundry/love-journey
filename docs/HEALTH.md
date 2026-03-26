@@ -1,7 +1,10 @@
 <a name="top"></a>
 
 ### 🎗️ Current Health Status: Fighting & Recovering
-<p align="center">![Day 1](https://img.shields.io/badge/Battle_Day-1-red?style=for-the-badge&logo=heartbeat)
+
+<p align="center">
+
+![Day 1](https://img.shields.io/badge/Battle_Day-1-red?style=for-the-badge&logo=heartbeat)
 
 </p>
 

@@ -247,7 +247,7 @@ def render_sections(
                     treatment_start, "%Y-%m-%d"
                 ).date()
                 days_fighting = (today - start_date).days + 1
-                day_counter = f"![Day {days_fighting}](https://img.shields.io/badge/Battle_Day-{days_fighting}-red?style=for-the-badge&logo=heartbeat)\n\n"
+                day_counter = f"![Day {days_fighting}](https://img.shields.io/badge/Battle_Day-{days_fighting}-red?style=for-the-badge&logo=heartbeat)"
             except ValueError:
                 pass
 
@@ -256,7 +256,12 @@ def render_sections(
             note_block = render_stylized_quote(personal_note, "Jacqueline", accent)
 
         sections["health_support"] = f"""### 🎗️ Current Health Status: {status}
-<p align="center">{day_counter}</p>
+
+<p align="center">
+
+{day_counter}
+
+</p>
 
 {message}
 
