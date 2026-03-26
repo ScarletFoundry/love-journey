@@ -1,3 +1,5 @@
+<a name="top"></a>
+
 ### 🗓️ Milestones & Timeline
 ```mermaid
 timeline
@@ -30,9 +32,27 @@ timeline
 ---
 
 ### 📸 Moments
+#### 2021: Luna Joins the Family 🐶
+*Our first puppy, Luna, bringing a new kind of joy to our journey.*
+
 <table width="100%">
   <tr>
-    <td align="center"><img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" width="200"><br><sub>Luna 🐶</sub></td>
-    <td align="center"><img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" width="200"><br><sub>Finn 🐾</sub></td>
+    <td align="center" width="33%"><img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" width="100%"><br><sub>Luna's first day home</sub></td>
   </tr>
 </table>
+
+#### 2022: Welcoming Finn 🐾
+*Expanding our little family with the addition of Finn.*
+
+<table width="100%">
+  <tr>
+    <td align="center" width="33%"><img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" width="100%"><br><sub>Finn exploring his new home</sub></td>
+  </tr>
+</table>
+
+
+
+---
+
+<p align="center"><a href="#top"><b>Back to Top ↑</b></a></p>
+<p align="center"><sub>Built with ❤️ by Jeff & Jacq | © 2026 Paper Pulse</sub></p>

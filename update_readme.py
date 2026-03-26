@@ -68,6 +68,26 @@ def main():
     # 3. Generate section components using the renderer module
     sections, discord_msg = render_sections(conf, now)
 
+    # 3.1 Prepare Branding Footer
+    theme = conf.get("theme", {})
+    branding = theme.get("branding", {})
+    footer_content = ""
+    if branding:
+        footer_text = branding.get("footer_text", "")
+        back_to_top = branding.get("show_back_to_top", False)
+
+        footer_parts = []
+        if back_to_top:
+            footer_parts.append(
+                '<p align="center"><a href="#top"><b>Back to Top ↑</b></a></p>'
+            )
+
+        if footer_text:
+            footer_parts.append(f'<p align="center"><sub>{footer_text}</sub></p>')
+
+        if footer_parts:
+            footer_content = "\n\n---\n\n" + "\n".join(footer_parts)
+
     # 4. Handle multiple output files
     output_mapping = conf.get("outputs", {"README.md": list(sections.keys())})
     DOCS_DIR.mkdir(exist_ok=True)
@@ -81,7 +101,12 @@ def main():
 
         # Assemble content for this specific file
         ordered_content = [sections[s] for s in section_keys if s in sections]
-        file_content = "\n\n---\n\n".join(ordered_content) + "\n"
+        file_content = (
+            '<a name="top"></a>\n\n'
+            + "\n\n---\n\n".join(ordered_content)
+            + footer_content
+            + "\n"
+        )
 
         # Check if update is needed
         if target_path.exists():

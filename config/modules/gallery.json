@@ -1,8 +1,26 @@
 {
   "gallery": {
-    "images": [
-      { "path": "love-journey/gallery/luna.jpg", "caption": "Luna 🐶" },
-      { "path": "love-journey/gallery/finn.jpg", "caption": "Finn 🐾" }
+    "chapters": [
+      {
+        "title": "2021: Luna Joins the Family 🐶",
+        "description": "Our first puppy, Luna, bringing a new kind of joy to our journey.",
+        "images": [
+          {
+            "path": "love-journey/gallery/luna.jpg",
+            "caption": "Luna's first day home"
+          }
+        ]
+      },
+      {
+        "title": "2022: Welcoming Finn 🐾",
+        "description": "Expanding our little family with the addition of Finn.",
+        "images": [
+          {
+            "path": "love-journey/gallery/finn.jpg",
+            "caption": "Finn exploring his new home"
+          }
+        ]
+      }
     ]
   }
 }

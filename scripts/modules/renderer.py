@@ -227,38 +227,51 @@ def render_sections(
 | :--- | :--- |
 {"\n".join(milestones_list)}"""
 
-    # Gallery Section
+    # Gallery Section (Chapter-based)
     gallery_conf = conf.get("gallery", {})
-    gallery_data = gallery_conf.get("images", [])
+    chapters = gallery_conf.get("chapters", [])
 
-    # Check Gallery specific CDN first, then fallback to Global settings
     use_cdn = gallery_conf.get("use_cdn", global_settings.get("use_cdn", False))
-    cdn_base = gallery_conf.get("cdn_base_url")
-    if not cdn_base:
-        cdn_base = global_settings.get("cdn_base_url", "")
+    cdn_base = gallery_conf.get("cdn_base_url") or global_settings.get(
+        "cdn_base_url", ""
+    )
 
-    if gallery_data:
-        cells = []
-        for img in gallery_data:
-            path = img.get("path", "")
-            caption = img.get("caption", "")
+    if chapters:
+        gallery_content = "### 📸 Moments\n"
+        for chapter in chapters:
+            title = chapter.get("title", "")
+            desc = chapter.get("description", "")
+            images = chapter.get("images", [])
 
-            img_src = path
-            if use_cdn and cdn_base:
-                if not path.startswith(("http://", "https://")):
+            chapter_html = f"#### {title}\n"
+            if desc:
+                chapter_html += f"*{desc}*\n\n"
+
+            cells = []
+            for img in images:
+                path = img.get("path", "")
+                caption = img.get("caption", "")
+                img_src = path
+                if (
+                    use_cdn
+                    and cdn_base
+                    and not path.startswith(("http://", "https://"))
+                ):
                     img_src = f"{cdn_base.rstrip('/')}/{path.lstrip('/')}"
 
-            cells.append(
-                f'<td align="center"><img src="{img_src}" width="200"><br><sub>{caption}</sub></td>'
-            )
+                cells.append(
+                    f'<td align="center" width="33%"><img src="{img_src}" width="100%"><br><sub>{caption}</sub></td>'
+                )
 
-        rows = [cells[i : i + 3] for i in range(0, len(cells), 3)]
-        gallery_table = '<table width="100%">\n'
-        for row in rows:
-            gallery_table += "  <tr>\n    " + "\n    ".join(row) + "\n  </tr>\n"
-        gallery_table += "</table>"
+            rows = [cells[i : i + 3] for i in range(0, len(cells), 3)]
+            table = '<table width="100%">\n'
+            for row in rows:
+                table += "  <tr>\n    " + "\n    ".join(row) + "\n  </tr>\n"
+            table += "</table>\n\n"
 
-        sections["gallery"] = f"### 📸 Moments\n{gallery_table}"
+            gallery_content += chapter_html + table
+
+        sections["gallery"] = gallery_content
 
     # Paper Pulse Section
     pp_conf = conf.get("paper_pulse", {})

@@ -1,3 +1,5 @@
+<a name="top"></a>
+
 # Our Journey Begins...
 
 For years, our love story unfolded quietly, a cherished bond known to our immediate families and, most importantly, to the two of us. Today, with full hearts, we are thrilled to share it more widely with the world.
@@ -23,3 +25,8 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 
 
 *Last Updated: 2026-03-26 UTC*
+
+---
+
+<p align="center"><a href="#top"><b>Back to Top ↑</b></a></p>
+<p align="center"><sub>Built with ❤️ by Jeff & Jacq | © 2026 Paper Pulse</sub></p>
