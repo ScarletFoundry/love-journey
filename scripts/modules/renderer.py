@@ -11,6 +11,27 @@ from .utils import (
 )
 
 
+def render_stylized_quote(text: str, author: str, color: str = "FF69B4") -> str:
+    """Renders a stylized HTML quote block for personal notes."""
+    clean_color = color.lstrip("#")
+    return f"""
+<div align="center">
+<table width="85%">
+  <tr>
+    <td style="border-left: 5px solid #{clean_color}; padding: 20px; background-color: rgba(0,0,0,0.03); border-radius: 8px;">
+      <p align="center" style="font-family: 'Georgia', serif; font-size: 1.2em; font-style: italic; line-height: 1.6;">
+        "{text}"
+      </p>
+      <p align="right">
+        <strong>— {author}</strong>
+      </p>
+    </td>
+  </tr>
+</table>
+</div>
+"""
+
+
 def get_profile_card(
     name: str,
     color: str,
@@ -216,6 +237,7 @@ def render_sections(
         status = health.get("status", "Recovering")
         last_update = health.get("last_update", "")
         message = health.get("message", "")
+        personal_note = health.get("personal_note", "")
         treatment_start = health.get("treatment_start", "")
 
         day_counter = ""
@@ -225,14 +247,22 @@ def render_sections(
                     treatment_start, "%Y-%m-%d"
                 ).date()
                 days_fighting = (today - start_date).days + 1
-                day_counter = f"**Day {days_fighting} of the Battle**\n>\n> "
+                day_counter = f"![Day {days_fighting}](https://img.shields.io/badge/Battle_Day-{days_fighting}-red?style=for-the-badge&logo=heartbeat)\n\n"
             except ValueError:
                 pass
 
-        sections["health_support"] = f"""### 🎗️ Jacqueline's Journey: {status}
-> {day_counter}{message}
->
-> *Last updated: {last_update}*"""
+        note_block = ""
+        if personal_note:
+            note_block = render_stylized_quote(personal_note, "Jacqueline", accent)
+
+        sections["health_support"] = f"""### 🎗️ Current Health Status: {status}
+<p align="center">{day_counter}</p>
+
+{message}
+
+{note_block}
+
+<p align="right"><i>Last updated: {last_update}</i></p>"""
 
     # Bluesky Notes Section (Separated by Actor)
     actor_posts = conf.get("bluesky_actor_posts", {})
@@ -268,7 +298,6 @@ def render_sections(
     # Gallery Section (Chapter-based)
     gallery_conf = conf.get("gallery", {})
     chapters = gallery_conf.get("chapters", [])
-
     use_cdn = gallery_conf.get("use_cdn", global_settings.get("use_cdn", False))
     cdn_base = gallery_conf.get("cdn_base_url") or global_settings.get(
         "cdn_base_url", ""
@@ -276,6 +305,36 @@ def render_sections(
 
     if chapters:
         gallery_content = "### 📸 Moments\n"
+
+        # Latest Moment Highlight
+        latest_img = None
+        for chapter in chapters:
+            if chapter.get("images"):
+                latest_img = chapter["images"][0]
+                latest_chapter_title = chapter.get("title")
+                break
+
+        if latest_img:
+            path = latest_img.get("path", "")
+            img_src = path
+            if use_cdn and cdn_base and not path.startswith(("http://", "https://")):
+                img_src = f"{cdn_base.rstrip('/')}/{path.lstrip('/')}"
+
+            gallery_content += f"""
+<div align="center">
+  <a href="{img_src}">
+    <img src="{img_src}" style="max-width: 100%; width: 700px; height: auto; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.1);" alt="Latest Moment">
+  </a>
+  <br>
+  <p align="center">
+    <sub><b>Latest Moment:</b> {latest_img.get("caption", "")} (from <i>{latest_chapter_title}</i>)</sub>
+  </p>
+</div>
+
+---
+
+"""
+
         for chapter in chapters:
             title = chapter.get("title", "")
             desc = chapter.get("description", "")
@@ -298,7 +357,7 @@ def render_sections(
                     img_src = f"{cdn_base.rstrip('/')}/{path.lstrip('/')}"
 
                 cells.append(
-                    f'<td align="center" width="33%"><img src="{img_src}" width="100%"><br><sub>{caption}</sub></td>'
+                    f'<td align="center" width="33%" valign="bottom"><a href="{img_src}"><img src="{img_src}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"></a><br><sub>{caption}</sub></td>'
                 )
 
             rows = [cells[i : i + 3] for i in range(0, len(cells), 3)]

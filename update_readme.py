@@ -5,11 +5,13 @@ This script calculates the duration of the relationship, generates a progress ba
 towards the next anniversary, and updates the markdown file with these details.
 """
 
+import argparse
 import datetime
 import json
 import os
 import sys
 from pathlib import Path
+from typing import Any, Dict
 
 # Add scripts directory to path for module imports
 sys.path.append(str(Path(__file__).parent / "scripts"))
@@ -22,14 +24,36 @@ CONFIG_PATH = Path("config.json")
 DOCS_DIR = Path("docs")
 
 
+def validate_config(conf: Dict[str, Any]) -> bool:
+    """Performs basic validation on the configuration dictionary."""
+    required_keys = ["relationship_start", "birthdays", "global_settings", "outputs"]
+    missing = [k for k in required_keys if k not in conf]
+    if missing:
+        print(f"::error::Missing required config keys: {', '.join(missing)}")
+        return False
+    return True
+
+
 def main():
     """Main execution flow for updating the README."""
+    parser = argparse.ArgumentParser(description="Update Love Journey documentation.")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Simulate the update without writing files or pushing to Git.",
+    )
+    args = parser.parse_args()
+
+    if args.dry_run:
+        print("🛠️  DRY RUN MODE: No changes will be saved or pushed.")
+
     # 1. Load configuration
     conf = load_json(CONFIG_PATH)
     if not conf:
-        print(
-            f"Error: Config file not found or empty at {CONFIG_PATH}", file=sys.stderr
-        )
+        print(f"::error::Config file not found or empty at {CONFIG_PATH}")
+        sys.exit(1)
+
+    if not validate_config(conf):
         sys.exit(1)
 
     # 1.1 Load modular configs
@@ -40,7 +64,8 @@ def main():
         if modules_dir.exists():
             for json_file in modules_dir.glob("*.json"):
                 module_data = load_json(json_file)
-                conf.update(module_data)
+                if module_data:
+                    conf.update(module_data)
             print(f"Loaded modular configs from {modules_path}")
 
     # 1.1.5 Load Bluesky Feed if enabled
@@ -64,7 +89,10 @@ def main():
                 bsky_url = f"https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor={handle}&limit=50"
                 req = bsky_request.Request(
                     bsky_url,
-                    headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"},
+                    headers={
+                        "User-Agent": "LoveJourneyBot/1.0",
+                        "Cache-Control": "no-cache",
+                    },
                 )
 
                 actor_posts = []
@@ -81,7 +109,6 @@ def main():
                             record = post.get("record", {})
                             text = record.get("text", "")
 
-                            # Filter by multiple hashtags
                             if hashtags:
                                 has_any_tag = False
                                 facets = record.get("facets", [])
@@ -100,7 +127,6 @@ def main():
                                     if tag in post_tags or f"#{tag}" in text.lower():
                                         has_any_tag = True
                                         break
-
                                 if not has_any_tag:
                                     continue
 
@@ -119,9 +145,7 @@ def main():
                     )
 
             except Exception as e:
-                print(
-                    f"Failed to fetch Bluesky feed for {handle}: {e}", file=sys.stderr
-                )
+                print(f"::warning::Failed to fetch Bluesky feed for {handle}: {e}")
 
         if all_posts:
             conf["bluesky_actor_posts"] = all_posts
@@ -135,15 +159,23 @@ def main():
 
                 req = remote_request.Request(
                     url,
-                    headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"},
+                    headers={
+                        "User-Agent": "LoveJourneyBot/1.0",
+                        "Cache-Control": "no-cache",
+                    },
                 )
                 with remote_request.urlopen(req, timeout=10) as response:
                     if response.status == 200:
                         remote_data = json.loads(response.read().decode(ENCODING))
-                        conf.update(remote_data)
-                        print(f"Successfully loaded remote config: {url}")
+                        if isinstance(remote_data, dict):
+                            conf.update(remote_data)
+                            print(f"Successfully loaded remote config: {url}")
+                        else:
+                            print(
+                                f"::warning::Remote config from {url} is not a valid JSON object."
+                            )
             except Exception as e:
-                print(f"Failed to load remote config from {url}: {e}", file=sys.stderr)
+                print(f"::warning::Failed to load remote config from {url}: {e}")
 
     # 2. Get current time in UTC
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -158,31 +190,26 @@ def main():
     if branding:
         footer_text = branding.get("footer_text", "")
         back_to_top = branding.get("show_back_to_top", False)
-
         footer_parts = []
         if back_to_top:
             footer_parts.append(
                 '<p align="center"><a href="#top"><b>Back to Top ↑</b></a></p>'
             )
-
         if footer_text:
             footer_parts.append(f'<p align="center"><sub>{footer_text}</sub></p>')
-
         if footer_parts:
             footer_content = "\n\n---\n\n" + "\n".join(footer_parts)
 
     # 4. Handle multiple output files
     output_mapping = conf.get("outputs", {"README.md": list(sections.keys())})
-    DOCS_DIR.mkdir(exist_ok=True)
+    if not args.dry_run:
+        DOCS_DIR.mkdir(exist_ok=True)
 
     updated_files = []
     for filename, section_keys in output_mapping.items():
-        # Determine target path: README.md stays at root, others go to docs/
         target_path = (
             Path(filename) if filename.lower() == "readme.md" else DOCS_DIR / filename
         )
-
-        # Assemble content for this specific file
         ordered_content = [sections[s] for s in section_keys if s in sections]
         file_content = (
             '<a name="top"></a>\n\n'
@@ -191,7 +218,6 @@ def main():
             + "\n"
         )
 
-        # Check if update is needed
         if target_path.exists():
             try:
                 if target_path.read_text(encoding=ENCODING) == file_content:
@@ -199,42 +225,38 @@ def main():
             except UnicodeDecodeError:
                 pass
 
-        # Write updated content
-        target_path.write_text(file_content, encoding=ENCODING)
         updated_files.append(str(target_path))
-        print(f"{target_path} updated successfully.")
+        if not args.dry_run:
+            target_path.write_text(file_content, encoding=ENCODING)
+            print(f"✅ {target_path} updated.")
+        else:
+            print(f"📝 [DRY RUN] Would update: {target_path}")
 
     if not updated_files:
-        print("No changes needed. All files are up to date.")
+        print("✨ No changes needed. All files are up to date.")
         return
 
-    # 6. Handle Discord Notifications if applicable
-    if discord_msg:
+    # 6. Handle Discord Notifications
+    if discord_msg and not args.dry_run:
         send_discord_notification(discord_msg)
 
-    # 7. Git Automation (if configured)
+    # 7. Git Automation
     git_conf = conf.get("git_settings")
-    if git_conf and os.environ.get("GITHUB_ACTIONS"):
+    if git_conf and os.environ.get("GITHUB_ACTIONS") and not args.dry_run:
         try:
             author_name = git_conf.get("author_name", "skiddle-bot")
             author_email = git_conf.get("author_email", "bot@skiddle.id")
             branch = git_conf.get("branch", "main")
 
-            # Check for changes across the root and docs directory
-            # This ensures we only run git config and commit if something actually changed
             status = os.popen("git status --porcelain README.md docs/").read().strip()
-
             if status:
-                print(f"Changes detected. Committing as {author_name}...")
+                print(f"Committing changes as {author_name}...")
                 run_git(["config", "user.name", author_name])
                 run_git(["config", "user.email", author_email])
-
-                # Stage README and the entire docs directory
                 run_git(["add", "README.md"])
                 if DOCS_DIR.exists():
                     run_git(["add", "docs/"])
 
-                # Create a descriptive commit message based on what changed
                 commit_msg = "chore: automated journey update 🕒 [skip ci]"
                 if "HEALTH.md" in status:
                     commit_msg = "chore: automated health status update 🎗️ [skip ci]"
@@ -243,14 +265,11 @@ def main():
 
                 run_git(["commit", "-m", commit_msg])
                 run_git(["push", "origin", f"HEAD:{branch}"])
-                print(f"Changes pushed to {branch} successfully.")
+                print(f"🚀 Changes pushed to {branch} successfully.")
             else:
-                print(
-                    "No changes detected in README.md or docs/. Skipping git operations."
-                )
-
+                print("No changes detected for Git.")
         except Exception as e:
-            print(f"Git operations failed: {e}", file=sys.stderr)
+            print(f"::error::Git operations failed: {e}")
 
 
 if __name__ == "__main__":

@@ -32,12 +32,25 @@ timeline
 ---
 
 ### 📸 Moments
+
+<div align="center">
+  <a href="https://cdn.skiddle.id/love-journey/gallery/luna.jpg">
+    <img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" style="max-width: 100%; width: 700px; height: auto; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.1);" alt="Latest Moment">
+  </a>
+  <br>
+  <p align="center">
+    <sub><b>Latest Moment:</b> Luna's first day home (from <i>2021: Luna Joins the Family 🐶</i>)</sub>
+  </p>
+</div>
+
+---
+
 #### 2021: Luna Joins the Family 🐶
 *Our first puppy, Luna, bringing a new kind of joy to our journey.*
 
 <table width="100%">
   <tr>
-    <td align="center" width="33%"><img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" width="100%"><br><sub>Luna's first day home</sub></td>
+    <td align="center" width="33%" valign="bottom"><a href="https://cdn.skiddle.id/love-journey/gallery/luna.jpg"><img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"></a><br><sub>Luna's first day home</sub></td>
   </tr>
 </table>
 
@@ -46,7 +59,7 @@ timeline
 
 <table width="100%">
   <tr>
-    <td align="center" width="33%"><img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" width="100%"><br><sub>Finn exploring his new home</sub></td>
+    <td align="center" width="33%" valign="bottom"><a href="https://cdn.skiddle.id/love-journey/gallery/finn.jpg"><img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"></a><br><sub>Finn exploring his new home</sub></td>
   </tr>
 </table>
 
