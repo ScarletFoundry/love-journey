@@ -22,6 +22,7 @@ from modules.utils import ENCODING, load_json, run_git, send_discord_notificatio
 # Constants
 CONFIG_PATH = Path("config.json")
 DOCS_DIR = Path("docs")
+INDEX_FILE = DOCS_DIR / "index.md"
 
 
 def validate_config(conf: Dict[str, Any]) -> bool:
@@ -220,9 +221,9 @@ def main():
 
     updated_files = []
     for filename, section_keys in output_mapping.items():
-        target_path = (
-            Path(filename) if filename.lower() == "readme.md" else DOCS_DIR / filename
-        )
+        is_readme = filename.lower() == "readme.md"
+        target_path = Path(filename) if is_readme else DOCS_DIR / filename
+
         ordered_content = [sections[s] for s in section_keys if s in sections]
         file_content = (
             '<a name="top"></a>\n\n'
@@ -241,7 +242,12 @@ def main():
         updated_files.append(str(target_path))
         if not args.dry_run:
             target_path.write_text(file_content, encoding=ENCODING)
-            print(f"✅ {target_path} updated.")
+            # If we just updated README.md, sync it to docs/index.md for MkDocs
+            if is_readme:
+                INDEX_FILE.write_text(file_content, encoding=ENCODING)
+                print(f"✅ {target_path} (and {INDEX_FILE}) updated.")
+            else:
+                print(f"✅ {target_path} updated.")
         else:
             print(f"📝 [DRY RUN] Would update: {target_path}")
 
