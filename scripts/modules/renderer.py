@@ -197,8 +197,21 @@ def render_sections(
         status = health.get("status", "Recovering")
         last_update = health.get("last_update", "")
         message = health.get("message", "")
+        treatment_start = health.get("treatment_start", "")
+
+        day_counter = ""
+        if treatment_start:
+            try:
+                start_date = datetime.datetime.strptime(
+                    treatment_start, "%Y-%m-%d"
+                ).date()
+                days_fighting = (today - start_date).days + 1
+                day_counter = f"**Day {days_fighting} of the Battle**\n>\n> "
+            except ValueError:
+                pass
+
         sections["health_support"] = f"""### 🎗️ Jacqueline's Journey: {status}
-> {message}
+> {day_counter}{message}
 >
 > *Last updated: {last_update}*"""
 
