@@ -45,7 +45,7 @@
   },
   "outputs": {
     "README.md": ["story", "counter"],
-    "JOURNEY.md": ["milestones", "gallery", "pets"],
+    "JOURNEY.md": ["pets", "milestones", "gallery"],
     "HEALTH.md": ["health_support", "bluesky_notes"],
     "PAPER_PULSE.md": ["paper_pulse"]
   },

@@ -306,45 +306,17 @@ def render_sections(
     if chapters:
         gallery_content = "### 📸 Moments\n"
 
-        # Latest Moment Highlight
-        latest_img = None
-        for chapter in chapters:
-            if chapter.get("images"):
-                latest_img = chapter["images"][0]
-                latest_chapter_title = chapter.get("title")
-                break
-
-        if latest_img:
-            path = latest_img.get("path", "")
-            img_src = path
-            if use_cdn and cdn_base and not path.startswith(("http://", "https://")):
-                img_src = f"{cdn_base.rstrip('/')}/{path.lstrip('/')}"
-
-            gallery_content += f"""
-<div align="center">
-  <a href="{img_src}">
-    <img src="{img_src}" style="max-width: 100%; width: 700px; height: auto; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.1);" alt="Latest Moment">
-  </a>
-  <br>
-  <p align="center">
-    <sub><b>Latest Moment:</b> {latest_img.get("caption", "")} (from <i>{latest_chapter_title}</i>)</sub>
-  </p>
-</div>
-
----
-
-"""
-
         for chapter in chapters:
             title = chapter.get("title", "")
             desc = chapter.get("description", "")
             images = chapter.get("images", [])
 
-            chapter_html = f"#### {title}\n"
+            chapter_html = f"#### 📖 {title}\n"
             if desc:
-                chapter_html += f"*{desc}*\n\n"
+                chapter_html += f"> *{desc}*\n\n"
 
-            cells = []
+            # Resolve all image paths first
+            resolved_images = []
             for img in images:
                 path = img.get("path", "")
                 caption = img.get("caption", "")
@@ -355,18 +327,46 @@ def render_sections(
                     and not path.startswith(("http://", "https://"))
                 ):
                     img_src = f"{cdn_base.rstrip('/')}/{path.lstrip('/')}"
+                resolved_images.append({"src": img_src, "caption": caption})
 
-                cells.append(
-                    f'<td align="center" width="33%" valign="bottom"><a href="{img_src}"><img src="{img_src}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"></a><br><sub>{caption}</sub></td>'
-                )
+            # Dynamic Layout based on image count
+            count = len(resolved_images)
+            layout_html = ""
 
-            rows = [cells[i : i + 3] for i in range(0, len(cells), 3)]
-            table = '<table width="100%">\n'
-            for row in rows:
-                table += "  <tr>\n    " + "\n    ".join(row) + "\n  </tr>\n"
-            table += "</table>\n\n"
+            if count == 1:
+                # Showcase (Full Width)
+                img = resolved_images[0]
+                layout_html = f"""
+<p align="center">
+  <a href="{img["src"]}">
+    <img src="{img["src"]}" style="max-width: 100%; width: 600px; height: auto; border-radius: 12px; border: 1px solid #eee;">
+  </a>
+  <br>
+  <sub>{img["caption"]}</sub>
+</p>
+"""
+            elif count == 2:
+                # 50/50 Split
+                layout_html = '<table width="100%"><tr>\n'
+                for img in resolved_images:
+                    layout_html += f'  <td width="50%" align="center" valign="bottom"><a href="{img["src"]}"><img src="{img["src"]}" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 10px;"></a><br><sub>{img["caption"]}</sub></td>\n'
+                layout_html += "</tr></table>\n"
+            elif count > 0:
+                # 3-Column Grid (Square)
+                cells = []
+                for img in resolved_images:
+                    cells.append(
+                        f'<td align="center" width="33%" valign="bottom"><a href="{img["src"]}"><img src="{img["src"]}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"></a><br><sub>{img["caption"]}</sub></td>'
+                    )
 
-            gallery_content += chapter_html + table
+                rows = [cells[i : i + 3] for i in range(0, len(cells), 3)]
+                table = '<table width="100%">\n'
+                for row in rows:
+                    table += "  <tr>\n    " + "\n    ".join(row) + "\n  </tr>\n"
+                table += "</table>\n"
+                layout_html = table
+
+            gallery_content += chapter_html + layout_html + "\n---\n"
 
         sections["gallery"] = gallery_content
 
@@ -467,20 +467,28 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
             pass
 
     sections["counter"] = f"""### 🕒 The Counter
-**We have been together for {duration_str}.** Next Anniversary Progress:
-{get_progress_bar(progress_percent)}
-{countdown_str}
-**Current Stats:**
-![Jeff](https://img.shields.io/badge/Jeff-{calculate_age(birthdays.get("Jeff", "1997-01-01"), today)}_y.o.-blue?style=flat-square) ![Jacqueline](https://img.shields.io/badge/Jacqueline-{calculate_age(birthdays.get("Jacqueline", "1999-01-01"), today)}_y.o.-{accent}?style=flat-square)
-{engagement_badge}
-{birthday_badge}
+<div align="center">
+  <p><b>We have been together for</b></p>
+  <h3>✨ {duration_str} ✨</h3>
+  <br>
+  <p>Next Anniversary Progress</p>
+  {get_progress_bar(progress_percent, width=30)}
+  {countdown_str}
+  <br>
 
-*Last Updated: {now.strftime("%Y-%m-%d")} UTC*"""
+  <p><b>Relationship Status</b></p>
+  ![Jeff](https://img.shields.io/badge/Jeff-{calculate_age(birthdays.get("Jeff", "1997-01-01"), today)}_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-{calculate_age(birthdays.get("Jacqueline", "1999-01-01"), today)}_y.o.-{accent}?style=for-the-badge)
+  <br>
+  {engagement_badge} {birthday_badge}
+
+  <br>
+  <sub><i>Last Updated: {now.strftime("%Y-%m-%d")} UTC</i></sub>
+</div>"""
 
     # Pets Section
     pets = conf.get("pets", [])
     if pets:
-        pet_content = '### 🐾 The Quiet Supporters\n\n<table width="100%">\n  <tr>\n'
+        pet_content = '### 🐾 The Quiet Supporters\n\n<div align="center">\n<table width="90%">\n  <tr>\n'
         for pet in pets:
             name = pet.get("name")
             role = pet.get("role")
@@ -495,15 +503,15 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
                 avatar = f"{global_settings.get('cdn_base_url').rstrip('/')}/{avatar.lstrip('/')}"
 
             pet_content += f"""    <td align="center" width="{100 // len(pets)}%">
-      <img src="{avatar}" width="120" style="border-radius:50%;" alt="{name}">
-      <br>
+      <img src="{avatar}" width="120" style="border-radius:50%; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="{name}">
+      <br><br>
       <strong>{name}</strong>
       <br>
-      <small>{role}</small>
+      <img src="https://img.shields.io/badge/-{role.replace(" ", "_")}-grey?style=flat-square" alt="{role}">
       <br>
-      <small>Joined: {joined}</small>
+      <small>Since {joined.split("-")[0]}</small>
     </td>\n"""
-        pet_content += "  </tr>\n</table>"
+        pet_content += "  </tr>\n</table>\n</div>"
         sections["pets"] = pet_content
 
     return sections, discord_msg

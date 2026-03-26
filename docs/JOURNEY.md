@@ -1,5 +1,34 @@
 <a name="top"></a>
 
+### 🐾 The Quiet Supporters
+
+<div align="center">
+<table width="90%">
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://cdn.skiddle.id/assets/gallery/luna.jpg" width="120" style="border-radius:50%; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Luna">
+      <br><br>
+      <strong>Luna</strong>
+      <br>
+      <img src="https://img.shields.io/badge/-Moral_Support-grey?style=flat-square" alt="Moral Support">
+      <br>
+      <small>Since 2021</small>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://cdn.skiddle.id/assets/gallery/finn.jpg" width="120" style="border-radius:50%; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Finn">
+      <br><br>
+      <strong>Finn</strong>
+      <br>
+      <img src="https://img.shields.io/badge/-Chief_Barker-grey?style=flat-square" alt="Chief Barker">
+      <br>
+      <small>Since 2022</small>
+    </td>
+  </tr>
+</table>
+</div>
+
+---
+
 ### 🗓️ Milestones & Timeline
 ```mermaid
 timeline
@@ -32,65 +61,33 @@ timeline
 ---
 
 ### 📸 Moments
+#### 📖 2021: Luna Joins the Family 🐶
+> *Our first puppy, Luna, bringing a new kind of joy to our journey.*
 
-<div align="center">
+
+<p align="center">
   <a href="https://cdn.skiddle.id/love-journey/gallery/luna.jpg">
-    <img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" style="max-width: 100%; width: 700px; height: auto; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.1);" alt="Latest Moment">
+    <img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" style="max-width: 100%; width: 600px; height: auto; border-radius: 12px; border: 1px solid #eee;">
   </a>
   <br>
-  <p align="center">
-    <sub><b>Latest Moment:</b> Luna's first day home (from <i>2021: Luna Joins the Family 🐶</i>)</sub>
-  </p>
-</div>
+  <sub>Luna's first day home</sub>
+</p>
+
+---
+#### 📖 2022: Welcoming Finn 🐾
+> *Expanding our little family with the addition of Finn.*
+
+
+<p align="center">
+  <a href="https://cdn.skiddle.id/love-journey/gallery/finn.jpg">
+    <img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" style="max-width: 100%; width: 600px; height: auto; border-radius: 12px; border: 1px solid #eee;">
+  </a>
+  <br>
+  <sub>Finn exploring his new home</sub>
+</p>
 
 ---
 
-#### 2021: Luna Joins the Family 🐶
-*Our first puppy, Luna, bringing a new kind of joy to our journey.*
-
-<table width="100%">
-  <tr>
-    <td align="center" width="33%" valign="bottom"><a href="https://cdn.skiddle.id/love-journey/gallery/luna.jpg"><img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"></a><br><sub>Luna's first day home</sub></td>
-  </tr>
-</table>
-
-#### 2022: Welcoming Finn 🐾
-*Expanding our little family with the addition of Finn.*
-
-<table width="100%">
-  <tr>
-    <td align="center" width="33%" valign="bottom"><a href="https://cdn.skiddle.id/love-journey/gallery/finn.jpg"><img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid #eee;"></a><br><sub>Finn exploring his new home</sub></td>
-  </tr>
-</table>
-
-
-
----
-
-### 🐾 The Quiet Supporters
-
-<table width="100%">
-  <tr>
-    <td align="center" width="50%">
-      <img src="https://cdn.skiddle.id/assets/gallery/luna.jpg" width="120" style="border-radius:50%;" alt="Luna">
-      <br>
-      <strong>Luna</strong>
-      <br>
-      <small>Moral Support</small>
-      <br>
-      <small>Joined: 2021-01-01</small>
-    </td>
-    <td align="center" width="50%">
-      <img src="https://cdn.skiddle.id/assets/gallery/finn.jpg" width="120" style="border-radius:50%;" alt="Finn">
-      <br>
-      <strong>Finn</strong>
-      <br>
-      <small>Chief Barker</small>
-      <br>
-      <small>Joined: 2022-01-01</small>
-    </td>
-  </tr>
-</table>
 
 ---
 
