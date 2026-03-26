@@ -6,7 +6,7 @@
 <table width="90%">
   <tr>
     <td align="center" width="50%">
-      <img src="https://cdn.skiddle.id/assets/gallery/luna.jpg" width="120" style="border-radius:50%; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Luna">
+      <img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpg" width="120" style="border-radius:50%; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Luna">
       <br><br>
       <strong>Luna</strong>
       <br>
@@ -15,7 +15,7 @@
       <small>Since 2021</small>
     </td>
     <td align="center" width="50%">
-      <img src="https://cdn.skiddle.id/assets/gallery/finn.jpg" width="120" style="border-radius:50%; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Finn">
+      <img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" width="120" style="border-radius:50%; border: 2px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Finn">
       <br><br>
       <strong>Finn</strong>
       <br>

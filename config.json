@@ -81,14 +81,14 @@
       "type": "Puppy",
       "role": "Moral Support",
       "joined": "2021-01-01",
-      "avatar": "assets/gallery/luna.jpg"
+      "avatar": "love-journey/gallery/luna.jpg"
     },
     {
       "name": "Finn",
       "type": "Puppy",
       "role": "Chief Barker",
       "joined": "2022-01-01",
-      "avatar": "assets/gallery/finn.jpg"
+      "avatar": "love-journey/gallery/finn.jpg"
     }
   ]
 }
