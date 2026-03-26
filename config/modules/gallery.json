@@ -1,7 +1,7 @@
 {
   "gallery": {
     "images": [
-      { "path": "love-journey/gallery/luna.jpeg", "caption": "Luna 🐶" },
+      { "path": "love-journey/gallery/luna.jpg", "caption": "Luna 🐶" },
       { "path": "love-journey/gallery/finn.jpg", "caption": "Finn 🐾" }
     ]
   }
