@@ -43,6 +43,89 @@ def main():
                 conf.update(module_data)
             print(f"Loaded modular configs from {modules_path}")
 
+    # 1.1.5 Load Bluesky Feed if enabled
+    bluesky_conf = global_settings.get("bluesky", {})
+    if bluesky_conf.get("fetch_latest"):
+        actors = bluesky_conf.get("actors", [])
+        limit_per_actor = bluesky_conf.get("limit_per_actor", 5)
+        all_posts = {}
+
+        for actor in actors:
+            name = actor.get("name")
+            handle = actor.get("handle")
+            hashtags = [h.lstrip("#").lower() for h in actor.get("hashtags", [])]
+
+            if not handle:
+                continue
+
+            try:
+                from urllib import request as bsky_request
+
+                bsky_url = f"https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor={handle}&limit=50"
+                req = bsky_request.Request(
+                    bsky_url,
+                    headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"},
+                )
+
+                actor_posts = []
+                with bsky_request.urlopen(req, timeout=10) as response:
+                    if response.status == 200:
+                        feed_data = json.loads(response.read().decode(ENCODING))
+                        feed = feed_data.get("feed", [])
+
+                        for item in feed:
+                            if len(actor_posts) >= limit_per_actor:
+                                break
+
+                            post = item.get("post", {})
+                            record = post.get("record", {})
+                            text = record.get("text", "")
+
+                            # Filter by multiple hashtags
+                            if hashtags:
+                                has_any_tag = False
+                                facets = record.get("facets", [])
+                                post_tags = []
+                                for facet in facets:
+                                    for feature in facet.get("features", []):
+                                        if (
+                                            feature.get("$type")
+                                            == "app.bsky.richtext.facet#tag"
+                                        ):
+                                            post_tags.append(
+                                                feature.get("tag", "").lower()
+                                            )
+
+                                for tag in hashtags:
+                                    if tag in post_tags or f"#{tag}" in text.lower():
+                                        has_any_tag = True
+                                        break
+
+                                if not has_any_tag:
+                                    continue
+
+                            actor_posts.append(
+                                {
+                                    "text": text,
+                                    "date": record.get("createdAt", "").split("T")[0],
+                                    "url": f"https://bsky.app/profile/{handle}/post/{post.get('uri', '').split('/')[-1]}",
+                                }
+                            )
+
+                if actor_posts:
+                    all_posts[name] = actor_posts
+                    print(
+                        f"Successfully loaded {len(actor_posts)} Bluesky posts from {name} ({handle})"
+                    )
+
+            except Exception as e:
+                print(
+                    f"Failed to fetch Bluesky feed for {handle}: {e}", file=sys.stderr
+                )
+
+        if all_posts:
+            conf["bluesky_actor_posts"] = all_posts
+
     # 1.2 Load remote configs if enabled
     if global_settings.get("remote_config_enabled"):
         remote_urls = global_settings.get("remote_config_urls", [])

@@ -210,26 +210,29 @@ def render_sections(
             except ValueError:
                 pass
 
-        # Bluesky Note Integration
-        bsky_conf = global_settings.get("bluesky_integration", {})
-        bsky_note = ""
-        if bsky_conf.get("enabled"):
-            handle = bsky_conf.get("handle", "scarletnine.bsky.social")
-            bsky_note = f"""
-> [!TIP]
-> **A Note from Jacqueline** (via Bluesky)
->
-> <p align="center">
->   <a href="https://bsky.app/profile/{handle}">
->     <img src="https://img.shields.io/badge/Follow_Updates-Bluesky-0085ff?style=flat-square&logo=bluesky" alt="Bluesky Updates">
->   </a>
-> </p>
-"""
-
         sections["health_support"] = f"""### 🎗️ Jacqueline's Journey: {status}
 > {day_counter}{message}
-{bsky_note}>
+>
 > *Last updated: {last_update}*"""
+
+    # Bluesky Notes Section (Separated by Actor)
+    actor_posts = conf.get("bluesky_actor_posts", {})
+    if actor_posts:
+        notes_content = "### 🦋 Personal Notes & Updates\n"
+
+        for name, posts in actor_posts.items():
+            icon = "✍️" if name == "Jeff" else "📖"
+            notes_content += f"#### {icon} From {name}\n"
+            for post in posts:
+                text = post.get("text", "")
+                date = post.get("date", "")
+                url = post.get("url", "#")
+                notes_content += f"""
+> *"{text}"*
+> — [{date}]({url})
+>
+"""
+        sections["bluesky_notes"] = notes_content.strip()
 
     sections["story"] = f"""# Our Journey Begins...
 {celebration_banner}
