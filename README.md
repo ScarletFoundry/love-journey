@@ -19,7 +19,6 @@ timeline
     2024 : August: The Engagement: Proposing to Jacqueline on her birthday 💍
     2025 : June: A New Battle: Supporting Jacqueline through her Acute Myeloid Leukemia journey 🎗️
     2026 : January: Paper Pulse: Combining ideas into music with AI assist 🎵
-    Future : Building the future, one commit at a time.
 ```
 
 | Date | Event |
@@ -35,6 +34,13 @@ timeline
 | 2025-06-01 | A New Battle: Supporting Jacqueline through her Acute Myeloid Leukemia journey 🎗️ |
 | 2026-01-11 | Paper Pulse: Combining ideas into music with AI assist 🎵 |
 | Future | Building the future, one commit at a time. |
+
+---
+
+### 🎗️ Jacqueline's Journey: Fighting & Recovering
+> Jacqueline is currently undergoing treatment for Acute Myeloid Leukemia. Your prayers and support mean the world to us.
+>
+> *Last updated: 2025-06-01*
 
 ---
 
@@ -86,6 +92,16 @@ Designer, Writer, and PR. Focused on crafting beautiful digital experiences, sto
 </td>
 
 </tr>
+</table>
+
+---
+
+### 📸 Moments
+<table width="100%">
+  <tr>
+    <td align="center"><img src="assets/gallery/luna.jpg" width="200"><br><sub>Luna 🐶</sub></td>
+    <td align="center"><img src="assets/gallery/finn.jpg" width="200"><br><sub>Finn 🐾</sub></td>
+  </tr>
 </table>
 
 ---

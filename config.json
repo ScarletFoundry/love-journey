@@ -4,6 +4,10 @@
     "Jeff": "1997-08-09",
     "Jacqueline": "1999-08-04"
   },
+  "global_settings": {
+    "use_cdn": false,
+    "cdn_base_url": "https://cdn.skiddle.id/"
+  },
   "theme": {
     "accent_color": "FF69B4",
     "show_progress_bar": true
@@ -13,7 +17,26 @@
     "author_email": "165562787+skiddle-bot@users.noreply.github.com",
     "branch": "main"
   },
+  "section_order": [
+    "story",
+    "milestones",
+    "health_support",
+    "paper_pulse",
+    "gallery",
+    "counter"
+  ],
   "story": "For years, our love story unfolded quietly, a cherished bond known to our immediate families and, most importantly, to the two of us. Today, with full hearts, we are thrilled to share it more widely with the world.\n\nIt all started in middle school around 2011, where Laurensius Jeffrey Chandra (Skiddle) and Jacqueline Patravee (Scarletnine) first met. Though high school took us on different paths, our connection remained, and on April 14, 2014, we took the step to build something serious together.",
+  "health_status": {
+    "status": "Fighting & Recovering",
+    "last_update": "2025-06-01",
+    "message": "Jacqueline is currently undergoing treatment for Acute Myeloid Leukemia. Your prayers and support mean the world to us."
+  },
+  "gallery": {
+    "images": [
+      { "path": "assets/gallery/luna.jpg", "caption": "Luna 🐶" },
+      { "path": "assets/gallery/finn.jpg", "caption": "Finn 🐾" }
+    ]
+  },
   "milestones": [
     { "date": "2011", "event": "The First Meeting (Middle School)" },
     { "date": "2014-04-14", "event": "The Journey Begins 🥂" },
@@ -49,11 +72,13 @@
   "profiles": {
     "Jeff": {
       "github": "skiddle-id",
+      "avatar_url": "",
       "bio": "Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.",
       "note": "Fighting & Creating"
     },
     "Jacqueline": {
       "github": "scarletnine",
+      "avatar_url": "",
       "bio": "Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs.",
       "note": "Designing through the journey"
     }
