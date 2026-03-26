@@ -5,7 +5,7 @@
     "Jacqueline": "1999-08-04"
   },
   "global_settings": {
-    "use_cdn": false,
+    "use_cdn": true,
     "cdn_base_url": "https://cdn.skiddle.id/",
     "config_modules_path": "config/modules",
     "remote_config_enabled": false,

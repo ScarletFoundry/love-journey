@@ -32,7 +32,7 @@ timeline
 ### 📸 Moments
 <table width="100%">
   <tr>
-    <td align="center"><img src="assets/gallery/luna.jpg" width="200"><br><sub>Luna 🐶</sub></td>
-    <td align="center"><img src="assets/gallery/finn.jpg" width="200"><br><sub>Finn 🐾</sub></td>
+    <td align="center"><img src="https://cdn.skiddle.id/love-journey/gallery/luna.jpeg" width="200"><br><sub>Luna 🐶</sub></td>
+    <td align="center"><img src="https://cdn.skiddle.id/love-journey/gallery/finn.jpg" width="200"><br><sub>Finn 🐾</sub></td>
   </tr>
 </table>
