@@ -47,6 +47,24 @@ timeline
 ### 🎨 Paper Pulse
 In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
+
+<table width="100%">
+  <tr>
+    <td width="30%" align="center">
+      <a href="https://soundcloud.com/paper-pulse">
+        <img src="assets/music/synthesized_hearts.jpg" width="150" style="border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="Synthesized Hearts">
+      </a>
+    </td>
+    <td width="70%" valign="top">
+      <h4>🎵 Latest Release: Synthesized Hearts</h4>
+      <p>Our first AI-assisted collaboration, blending Jeff's logic with Jacq's storytelling.</p>
+      <a href="https://soundcloud.com/paper-pulse"><b>Listen Now →</b></a>
+    </td>
+  </tr>
+</table>
+<br>
+
+
 <table width="100%">
 <tr>
 

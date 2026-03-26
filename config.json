@@ -31,6 +31,14 @@
     "last_update": "2025-06-01",
     "message": "Jacqueline is currently undergoing treatment for Acute Myeloid Leukemia. Your prayers and support mean the world to us."
   },
+  "paper_pulse": {
+    "latest_release": {
+      "title": "Synthesized Hearts",
+      "cover": "assets/music/synthesized_hearts.jpg",
+      "link": "https://soundcloud.com/paper-pulse",
+      "description": "Our first AI-assisted collaboration, blending Jeff's logic with Jacq's storytelling."
+    }
+  },
   "gallery": {
     "images": [
       { "path": "assets/gallery/luna.jpg", "caption": "Luna 🐶" },

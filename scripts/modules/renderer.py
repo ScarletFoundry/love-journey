@@ -250,8 +250,51 @@ def render_sections(
 
         sections["gallery"] = f"### 📸 Moments\n{gallery_table}"
 
-    sections["paper_pulse"] = f"""### 🎨 Paper Pulse
-In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
+    # Paper Pulse Section
+    pp_conf = conf.get("paper_pulse", {})
+    latest = pp_conf.get("latest_release", {})
+
+    pp_header = """### 🎨 Paper Pulse
+In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software."""
+
+    pp_music_card = ""
+    if latest:
+        title = latest.get("title", "New Track")
+        cover = latest.get("cover", "")
+        link = latest.get("link", "#")
+        desc = latest.get("description", "")
+
+        # Apply global CDN to cover if needed
+        if (
+            global_settings.get("use_cdn")
+            and cover
+            and not cover.startswith(("http://", "https://"))
+        ):
+            cover = (
+                f"{global_settings.get('cdn_base_url').rstrip('/')}/{cover.lstrip('/')}"
+            )
+
+        pp_music_card = f"""
+<table width="100%">
+  <tr>
+    <td width="30%" align="center">
+      <a href="{link}">
+        <img src="{cover}" width="150" style="border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="{title}">
+      </a>
+    </td>
+    <td width="70%" valign="top">
+      <h4>🎵 Latest Release: {title}</h4>
+      <p>{desc}</p>
+      <a href="{link}"><b>Listen Now →</b></a>
+    </td>
+  </tr>
+</table>
+<br>
+"""
+
+    sections["paper_pulse"] = f"""{pp_header}
+
+{pp_music_card}
 
 <table width="100%">
 <tr>
