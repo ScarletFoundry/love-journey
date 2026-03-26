@@ -113,8 +113,8 @@ def generate_mermaid_timeline(milestones: List[Dict]) -> str:
 
 def render_sections(
     conf: Dict[str, Any], now: datetime.datetime
-) -> Tuple[str, Optional[str]]:
-    """Renders all sections based on configuration and current time."""
+) -> Tuple[Dict[str, str], Optional[str]]:
+    """Renders all sections and returns them as a dictionary of components."""
     today = now.date()
     discord_msg = None
 
@@ -219,7 +219,6 @@ def render_sections(
     gallery_data = gallery_conf.get("images", [])
 
     # Check Gallery specific CDN first, then fallback to Global settings
-    global_settings = conf.get("global_settings", {})
     use_cdn = gallery_conf.get("use_cdn", global_settings.get("use_cdn", False))
     cdn_base = gallery_conf.get("cdn_base_url")
     if not cdn_base:
@@ -233,7 +232,6 @@ def render_sections(
 
             img_src = path
             if use_cdn and cdn_base:
-                # If path is already a full URL, don't prepend CDN base
                 if not path.startswith(("http://", "https://")):
                     img_src = f"{cdn_base.rstrip('/')}/{path.lstrip('/')}"
 
@@ -241,7 +239,6 @@ def render_sections(
                 f'<td align="center"><img src="{img_src}" width="200"><br><sub>{caption}</sub></td>'
             )
 
-        # Split into rows of 3 for better layout
         rows = [cells[i : i + 3] for i in range(0, len(cells), 3)]
         gallery_table = '<table width="100%">\n'
         for row in rows:
@@ -264,7 +261,6 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
         link = latest.get("link", "#")
         desc = latest.get("description", "")
 
-        # Apply global CDN to cover if needed
         if (
             global_settings.get("use_cdn")
             and cover
@@ -314,11 +310,4 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
 
 *Last Updated: {now.strftime("%Y-%m-%d")} UTC*"""
 
-    # Assemble based on section_order
-    order = conf.get(
-        "section_order",
-        ["story", "milestones", "health_support", "paper_pulse", "gallery", "counter"],
-    )
-    ordered_content = [sections[s] for s in order if s in sections]
-
-    return "\n\n---\n\n".join(ordered_content) + "\n", discord_msg
+    return sections, discord_msg

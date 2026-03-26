@@ -18,7 +18,7 @@ from modules.utils import ENCODING, load_json, run_git, send_discord_notificatio
 
 # Constants
 CONFIG_PATH = Path("config.json")
-README_PATH = Path("README.md")
+DOCS_DIR = Path("docs")
 
 
 def main():
@@ -34,22 +34,40 @@ def main():
     # 2. Get current time in UTC
     now = datetime.datetime.now(datetime.timezone.utc)
 
-    # 3. Generate new content using the renderer module
-    new_content, discord_msg = render_sections(conf, now)
+    # 3. Generate section components using the renderer module
+    sections, discord_msg = render_sections(conf, now)
 
-    # 4. Check if update is actually needed
-    if README_PATH.exists():
-        try:
-            current_content = README_PATH.read_text(encoding=ENCODING)
-            if current_content == new_content:
-                print("No changes needed. README is up to date.")
-                return
-        except UnicodeDecodeError:
-            print("Existing README has unknown encoding, rewriting...", file=sys.stderr)
+    # 4. Handle multiple output files
+    output_mapping = conf.get("outputs", {"README.md": list(sections.keys())})
+    DOCS_DIR.mkdir(exist_ok=True)
 
-    # 5. Write updated content
-    README_PATH.write_text(new_content, encoding=ENCODING)
-    print("README.md updated successfully.")
+    updated_files = []
+    for filename, section_keys in output_mapping.items():
+        # Determine target path: README.md stays at root, others go to docs/
+        target_path = (
+            Path(filename) if filename.lower() == "readme.md" else DOCS_DIR / filename
+        )
+
+        # Assemble content for this specific file
+        ordered_content = [sections[s] for s in section_keys if s in sections]
+        file_content = "\n\n---\n\n".join(ordered_content) + "\n"
+
+        # Check if update is needed
+        if target_path.exists():
+            try:
+                if target_path.read_text(encoding=ENCODING) == file_content:
+                    continue
+            except UnicodeDecodeError:
+                pass
+
+        # Write updated content
+        target_path.write_text(file_content, encoding=ENCODING)
+        updated_files.append(str(target_path))
+        print(f"{target_path} updated successfully.")
+
+    if not updated_files:
+        print("No changes needed. All files are up to date.")
+        return
 
     # 6. Handle Discord Notifications if applicable
     if discord_msg:
@@ -66,7 +84,11 @@ def main():
             print(f"Committing changes as {author_name}...")
             run_git(["config", "user.name", author_name])
             run_git(["config", "user.email", author_email])
+
+            # Add all updated files and docs directory
             run_git(["add", "README.md"])
+            if DOCS_DIR.exists():
+                run_git(["add", str(DOCS_DIR)])
 
             # Check if there are staged changes before committing
             status = os.popen("git status --porcelain").read()
