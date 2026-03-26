@@ -45,7 +45,7 @@
   },
   "outputs": {
     "README.md": ["story", "counter"],
-    "JOURNEY.md": ["milestones", "gallery"],
+    "JOURNEY.md": ["milestones", "gallery", "pets"],
     "HEALTH.md": ["health_support", "bluesky_notes"],
     "PAPER_PULSE.md": ["paper_pulse"]
   },
@@ -70,5 +70,25 @@
   "skills": {
     "Jeff": ["AI", "Python", "Clean Code", "Logic"],
     "Jacqueline": ["Figma", "Storytelling", "Brand Design", "Public Relations"]
-  }
+  },
+  "anniversary_settings": {
+    "show_countdown": true,
+    "label": "Next Milestone"
+  },
+  "pets": [
+    {
+      "name": "Luna",
+      "type": "Puppy",
+      "role": "Moral Support",
+      "joined": "2021-01-01",
+      "avatar": "assets/gallery/luna.jpg"
+    },
+    {
+      "name": "Finn",
+      "type": "Puppy",
+      "role": "Chief Barker",
+      "joined": "2022-01-01",
+      "avatar": "assets/gallery/finn.jpg"
+    }
+  ]
 }

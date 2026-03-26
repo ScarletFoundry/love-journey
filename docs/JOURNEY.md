@@ -54,5 +54,32 @@ timeline
 
 ---
 
+### 🐾 The Quiet Supporters
+
+<table width="100%">
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://cdn.skiddle.id/assets/gallery/luna.jpg" width="120" style="border-radius:50%;" alt="Luna">
+      <br>
+      <strong>Luna</strong>
+      <br>
+      <small>Moral Support</small>
+      <br>
+      <small>Joined: 2021-01-01</small>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://cdn.skiddle.id/assets/gallery/finn.jpg" width="120" style="border-radius:50%;" alt="Finn">
+      <br>
+      <strong>Finn</strong>
+      <br>
+      <small>Chief Barker</small>
+      <br>
+      <small>Joined: 2022-01-01</small>
+    </td>
+  </tr>
+</table>
+
+---
+
 <p align="center"><a href="#top"><b>Back to Top ↑</b></a></p>
 <p align="center"><sub>Built with ❤️ by Jeff & Jacq | © 2026 Paper Pulse</sub></p>

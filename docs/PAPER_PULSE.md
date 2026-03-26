@@ -47,6 +47,7 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
 Developer with diverse knowledge of AI, Code, and Logic. Passionate about building secure, user-centric software and exploring the intersection of technology and privacy.
 <br><br>
 <img src="https://img.shields.io/badge/-AI-3498db?style=flat-square" alt="AI"> <img src="https://img.shields.io/badge/-Python-3498db?style=flat-square" alt="Python"> <img src="https://img.shields.io/badge/-Clean_Code-3498db?style=flat-square" alt="Clean Code"> <img src="https://img.shields.io/badge/-Logic-3498db?style=flat-square" alt="Logic">
+<br><b>Paper Pulse Roles:</b><br><img src="https://img.shields.io/badge/-Logic-grey?style=flat-square" alt="Logic"> <img src="https://img.shields.io/badge/-AI_Prompting-grey?style=flat-square" alt="AI Prompting"> <img src="https://img.shields.io/badge/-Sound_Engineering-grey?style=flat-square" alt="Sound Engineering">
 <br>
 <p align="center">
 <br>
@@ -68,6 +69,7 @@ Developer with diverse knowledge of AI, Code, and Logic. Passionate about buildi
 Designer, Writer, and PR. Focused on crafting beautiful digital experiences, storytelling, and minimalist designs.
 <br><br>
 <img src="https://img.shields.io/badge/-Figma-FF69B4?style=flat-square" alt="Figma"> <img src="https://img.shields.io/badge/-Storytelling-FF69B4?style=flat-square" alt="Storytelling"> <img src="https://img.shields.io/badge/-Brand_Design-FF69B4?style=flat-square" alt="Brand Design"> <img src="https://img.shields.io/badge/-Public_Relations-FF69B4?style=flat-square" alt="Public Relations">
+<br><b>Paper Pulse Roles:</b><br><img src="https://img.shields.io/badge/-Storytelling-grey?style=flat-square" alt="Storytelling"> <img src="https://img.shields.io/badge/-Visual_Design-grey?style=flat-square" alt="Visual Design"> <img src="https://img.shields.io/badge/-Public_Relations-grey?style=flat-square" alt="Public Relations">
 <br>
 <p align="center">
 <br>

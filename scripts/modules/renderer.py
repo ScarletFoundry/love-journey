@@ -12,7 +12,12 @@ from .utils import (
 
 
 def get_profile_card(
-    name: str, color: str, profiles: Dict, skills_data: Dict, links: Dict
+    name: str,
+    color: str,
+    profiles: Dict,
+    skills_data: Dict,
+    links: Dict,
+    role_data: Dict = None,
 ) -> str:
     """Generates an HTML table cell for a profile."""
     p = profiles.get(name, {})
@@ -21,6 +26,7 @@ def get_profile_card(
     bio = p.get("bio", "")
     link = links.get(name, "#")
     skills = skills_data.get(name, [])
+    roles = role_data.get(name, []) if role_data else []
 
     # Global Settings
     global_settings = p.get("_global_settings", {})
@@ -38,6 +44,15 @@ def get_profile_card(
             for s in skills
         ]
     )
+
+    role_badges = ""
+    if roles:
+        role_badges = "<br><b>Paper Pulse Roles:</b><br>" + " ".join(
+            [
+                f'<img src="https://img.shields.io/badge/-{r.replace(" ", "_")}-grey?style=flat-square" alt="{r}">'
+                for r in roles
+            ]
+        )
 
     if avatar_url:
         if (
@@ -69,6 +84,7 @@ def get_profile_card(
 {bio}
 <br><br>
 {badges}
+{role_badges}
 <br>
 <p align="center">
 <br>
@@ -155,19 +171,22 @@ def render_sections(
         profiles[p_name]["_global_settings"] = global_settings
 
     # Profile Cards
+    role_data = conf.get("roles", {})
     jeff_card = get_profile_card(
         "Jeff",
         "3498db",
-        profiles,
+        conf.get("profiles", {}),
         conf.get("skills", {}),
         conf.get("links", {}),
+        role_data,
     )
     jacq_card = get_profile_card(
         "Jacqueline",
         accent,
-        profiles,
+        conf.get("profiles", {}),
         conf.get("skills", {}),
         conf.get("links", {}),
+        role_data,
     )
 
     # Engagement Badge
@@ -365,15 +384,67 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
 </tr>
 </table>"""
 
+    # The Counter Section
+    anniversary_conf = conf.get("anniversary_settings", {})
+    countdown_str = ""
+    if anniversary_conf.get("show_countdown"):
+        try:
+            today_year = today.year
+            anniversary_this_year = start_dt.replace(year=today_year).date()
+            if today > anniversary_this_year:
+                anniversary_next = start_dt.replace(year=today_year + 1).date()
+            else:
+                anniversary_next = anniversary_this_year
+
+            days_left = (anniversary_next - today).days
+            if days_left == 0:
+                countdown_str = "\n**🎉 Today is our Anniversary! 🎉**\n"
+            else:
+                label = anniversary_conf.get("label", "Next Anniversary")
+                countdown_str = (
+                    f"\n**⏳ {days_left} days remaining until our {label}**\n"
+                )
+        except Exception:
+            pass
+
     sections["counter"] = f"""### 🕒 The Counter
 **We have been together for {duration_str}.** Next Anniversary Progress:
 {get_progress_bar(progress_percent)}
-
+{countdown_str}
 **Current Stats:**
 ![Jeff](https://img.shields.io/badge/Jeff-{calculate_age(birthdays.get("Jeff", "1997-01-01"), today)}_y.o.-blue?style=flat-square) ![Jacqueline](https://img.shields.io/badge/Jacqueline-{calculate_age(birthdays.get("Jacqueline", "1999-01-01"), today)}_y.o.-{accent}?style=flat-square)
 {engagement_badge}
 {birthday_badge}
 
 *Last Updated: {now.strftime("%Y-%m-%d")} UTC*"""
+
+    # Pets Section
+    pets = conf.get("pets", [])
+    if pets:
+        pet_content = '### 🐾 The Quiet Supporters\n\n<table width="100%">\n  <tr>\n'
+        for pet in pets:
+            name = pet.get("name")
+            role = pet.get("role")
+            joined = pet.get("joined")
+            avatar = pet.get("avatar", "")
+
+            if (
+                global_settings.get("use_cdn")
+                and avatar
+                and not avatar.startswith(("http://", "https://"))
+            ):
+                avatar = f"{global_settings.get('cdn_base_url').rstrip('/')}/{avatar.lstrip('/')}"
+
+            pet_content += f"""    <td align="center" width="{100 // len(pets)}%">
+      <img src="{avatar}" width="120" style="border-radius:50%;" alt="{name}">
+      <br>
+      <strong>{name}</strong>
+      <br>
+      <small>{role}</small>
+      <br>
+      <small>Joined: {joined}</small>
+    </td>\n"""
+        pet_content += "  </tr>\n</table>"
+        sections["pets"] = pet_content
 
     return sections, discord_msg

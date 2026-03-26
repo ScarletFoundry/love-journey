@@ -19,6 +19,8 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 **We have been together for 11 years, 11 months, 12 days.** Next Anniversary Progress:
 `██████████████████░░ 94.8%`
 
+**⏳ 19 days remaining until our Next Milestone**
+
 **Current Stats:**
 ![Jeff](https://img.shields.io/badge/Jeff-28_y.o.-blue?style=flat-square) ![Jacqueline](https://img.shields.io/badge/Jacqueline-26_y.o.-FF69B4?style=flat-square)
 ![Engaged](https://img.shields.io/badge/Engaged-599_days-gold?style=flat-square&logo=heart)
