@@ -1,23 +1,33 @@
 ### 🎨 Paper Pulse
 In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
 
+[**Visit our YouTube Channel →**](https://www.youtube.com/@paperpulsemusic)
+
 
 <table width="100%">
   <tr>
-    <td width="30%" align="center">
-      <a href="https://soundcloud.com/paper-pulse">
-        <img src="assets/music/synthesized_hearts.jpg" width="150" style="border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="Synthesized Hearts">
+    <td width="35%" align="center">
+      <a href="https://www.youtube.com/watch?v=yBVkFP1SWJU">
+        <img src="https://img.youtube.com/vi/yBVkFP1SWJU/maxresdefault.jpg" width="240" style="border-radius:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" alt="Skiddle - Empty feat. Paper Pulse">
       </a>
     </td>
-    <td width="70%" valign="top">
-      <h4>🎵 Latest Release: Synthesized Hearts</h4>
-      <p>Our first AI-assisted collaboration, blending Jeff's logic with Jacq's storytelling.</p>
-      <a href="https://soundcloud.com/paper-pulse"><b>Listen Now →</b></a>
+    <td width="65%" valign="top">
+      <h4>🎵 Featured: Skiddle - Empty feat. Paper Pulse</h4>
+      <p>A deep dive into emotion and logic. Published by Skiddle, featuring the collaborative essence of Paper Pulse.</p>
+      <a href="https://www.youtube.com/watch?v=yBVkFP1SWJU"><b>Watch on YouTube →</b></a>
     </td>
   </tr>
 </table>
+
+<details>
+<summary>📂 View Release History</summary>
 <br>
 
+| Date | Track Title |
+| :--- | :--- |
+| 2026-02-19 | [Empty - Skiddle feat. Paper Pulse](https://www.youtube.com/watch?v=yBVkFP1SWJU) |
+| 2026-01-11 | [Quiet Room](https://www.youtube.com/watch?v=83FqpNOHjCA) |
+</details>
 
 <table width="100%">
 <tr>

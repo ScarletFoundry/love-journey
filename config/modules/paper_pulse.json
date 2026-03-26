@@ -1,10 +1,23 @@
 {
   "paper_pulse": {
+    "channel": "https://www.youtube.com/@paperpulsemusic",
     "latest_release": {
-      "title": "Synthesized Hearts",
-      "cover": "assets/music/synthesized_hearts.jpg",
-      "link": "https://soundcloud.com/paper-pulse",
-      "description": "Our first AI-assisted collaboration, blending Jeff's logic with Jacq's storytelling."
-    }
+      "title": "Skiddle - Empty feat. Paper Pulse",
+      "cover": "https://img.youtube.com/vi/yBVkFP1SWJU/maxresdefault.jpg",
+      "link": "https://www.youtube.com/watch?v=yBVkFP1SWJU",
+      "description": "A deep dive into emotion and logic. Published by Skiddle, featuring the collaborative essence of Paper Pulse."
+    },
+    "releases": [
+      {
+        "title": "Empty - Skiddle feat. Paper Pulse",
+        "link": "https://www.youtube.com/watch?v=yBVkFP1SWJU",
+        "date": "2026-02-19"
+      },
+      {
+        "title": "Quiet Room",
+        "link": "https://www.youtube.com/watch?v=83FqpNOHjCA",
+        "date": "2026-01-11"
+      }
+    ]
   }
 }

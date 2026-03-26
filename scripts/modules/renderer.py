@@ -263,9 +263,13 @@ def render_sections(
     # Paper Pulse Section
     pp_conf = conf.get("paper_pulse", {})
     latest = pp_conf.get("latest_release", {})
+    releases = pp_conf.get("releases", [])
+    channel = pp_conf.get("channel", "https://www.youtube.com/@paperpulsemusic")
 
-    pp_header = """### 🎨 Paper Pulse
-In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software."""
+    pp_header = f"""### 🎨 Paper Pulse
+In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of combining our ideas into music using AI assistance, alongside our shared focus on privacy, design, and software.
+
+[**Visit our YouTube Channel →**]({channel})"""
 
     pp_music_card = ""
     if latest:
@@ -286,24 +290,41 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
         pp_music_card = f"""
 <table width="100%">
   <tr>
-    <td width="30%" align="center">
+    <td width="35%" align="center">
       <a href="{link}">
-        <img src="{cover}" width="150" style="border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" alt="{title}">
+        <img src="{cover}" width="240" style="border-radius:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" alt="{title}">
       </a>
     </td>
-    <td width="70%" valign="top">
-      <h4>🎵 Latest Release: {title}</h4>
+    <td width="65%" valign="top">
+      <h4>🎵 Featured: {title}</h4>
       <p>{desc}</p>
-      <a href="{link}"><b>Listen Now →</b></a>
+      <a href="{link}"><b>Watch on YouTube →</b></a>
     </td>
   </tr>
-</table>
+</table>"""
+
+    pp_history = ""
+    if releases:
+        rows = []
+        for r in releases:
+            rows.append(
+                f"| {r.get('date', '-')} | [{r.get('title')}]({r.get('link')}) |"
+            )
+
+        pp_history = f"""
+<details>
+<summary>📂 View Release History</summary>
 <br>
-"""
+
+| Date | Track Title |
+| :--- | :--- |
+{"\n".join(rows)}
+</details>"""
 
     sections["paper_pulse"] = f"""{pp_header}
 
 {pp_music_card}
+{pp_history}
 
 <table width="100%">
 <tr>
