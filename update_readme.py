@@ -6,6 +6,7 @@ towards the next anniversary, and updates the markdown file with these details.
 """
 
 import datetime
+import json
 import os
 import sys
 from pathlib import Path
@@ -30,6 +31,36 @@ def main():
             f"Error: Config file not found or empty at {CONFIG_PATH}", file=sys.stderr
         )
         sys.exit(1)
+
+    # 1.1 Load modular configs
+    global_settings = conf.get("global_settings", {})
+    modules_path = global_settings.get("config_modules_path")
+    if modules_path:
+        modules_dir = Path(modules_path)
+        if modules_dir.exists():
+            for json_file in modules_dir.glob("*.json"):
+                module_data = load_json(json_file)
+                conf.update(module_data)
+            print(f"Loaded modular configs from {modules_path}")
+
+    # 1.2 Load remote configs if enabled
+    if global_settings.get("remote_config_enabled"):
+        remote_urls = global_settings.get("remote_config_urls", [])
+        for url in remote_urls:
+            try:
+                from urllib import request as remote_request
+
+                req = remote_request.Request(
+                    url,
+                    headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"},
+                )
+                with remote_request.urlopen(req, timeout=10) as response:
+                    if response.status == 200:
+                        remote_data = json.loads(response.read().decode(ENCODING))
+                        conf.update(remote_data)
+                        print(f"Successfully loaded remote config: {url}")
+            except Exception as e:
+                print(f"Failed to load remote config from {url}: {e}", file=sys.stderr)
 
     # 2. Get current time in UTC
     now = datetime.datetime.now(datetime.timezone.utc)

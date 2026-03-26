@@ -6,7 +6,13 @@
   },
   "global_settings": {
     "use_cdn": false,
-    "cdn_base_url": "https://cdn.skiddle.id/"
+    "cdn_base_url": "https://cdn.skiddle.id/",
+    "config_modules_path": "config/modules",
+    "remote_config_enabled": false,
+    "remote_config_urls": [
+      "https://cdn.skiddle.id/love-journey/health.json",
+      "https://cdn.skiddle.id/love-journey/paper_pulse.json"
+    ]
   },
   "theme": {
     "accent_color": "FF69B4",
@@ -23,55 +29,6 @@
     "HEALTH.md": ["health_support"],
     "PAPER_PULSE.md": ["paper_pulse"]
   },
-  "story": "For years, our love story unfolded quietly, a cherished bond known to our immediate families and, most importantly, to the two of us. Today, with full hearts, we are thrilled to share it more widely with the world.\n\nIt all started in middle school around 2011, where Laurensius Jeffrey Chandra (Skiddle) and Jacqueline Patravee (Scarletnine) first met. Though high school took us on different paths, our connection remained, and on April 14, 2014, we took the step to build something serious together.\n\n---\n\n### 📖 Explore Our Journey\n- [🗓️ Detailed Milestones & Gallery](docs/JOURNEY.md)\n- [🎗️ Health Updates & Support](docs/HEALTH.md)\n- [🎨 Paper Pulse Music Project](docs/PAPER_PULSE.md)",
-  "health_status": {
-    "status": "Fighting & Recovering",
-    "treatment_start": "2025-06-01",
-    "last_update": "2025-06-01",
-    "message": "Jacqueline is currently undergoing treatment for Acute Myeloid Leukemia. Your prayers and support mean the world to us."
-  },
-  "paper_pulse": {
-    "latest_release": {
-      "title": "Synthesized Hearts",
-      "cover": "assets/music/synthesized_hearts.jpg",
-      "link": "https://soundcloud.com/paper-pulse",
-      "description": "Our first AI-assisted collaboration, blending Jeff's logic with Jacq's storytelling."
-    }
-  },
-  "gallery": {
-    "images": [
-      { "path": "assets/gallery/luna.jpg", "caption": "Luna 🐶" },
-      { "path": "assets/gallery/finn.jpg", "caption": "Finn 🐾" }
-    ]
-  },
-  "milestones": [
-    { "date": "2011", "event": "The First Meeting (Middle School)" },
-    { "date": "2014-04-14", "event": "The Journey Begins 🥂" },
-    {
-      "date": "2019-06-01",
-      "event": "Jacqueline moved to Bangkok for her education 📚"
-    },
-    { "date": "2019-12-01", "event": "Jeff moved to Thailand to be closer 🌏" },
-    {
-      "date": "2020-03-01",
-      "event": "Thailand Lockdown: Navigating COVID-19 together 🏠"
-    },
-    { "date": "2021-01-01", "event": "Adopting our first puppy, Luna 🐶" },
-    { "date": "2022-01-01", "event": "Welcoming Finn to the family 🐾" },
-    {
-      "date": "2024-08-04",
-      "event": "The Engagement: Proposing to Jacqueline on her birthday 💍"
-    },
-    {
-      "date": "2025-06-01",
-      "event": "A New Battle: Supporting Jacqueline through her Acute Myeloid Leukemia journey 🎗️"
-    },
-    {
-      "date": "2026-01-11",
-      "event": "Paper Pulse: Combining ideas into music with AI assist 🎵"
-    },
-    { "date": "Future", "event": "Building the future, one commit at a time." }
-  ],
   "links": {
     "Jeff": "https://skiddle.id",
     "Jacqueline": "https://scarletnine.dev"

@@ -1,0 +1,8 @@
+{
+  "gallery": {
+    "images": [
+      { "path": "assets/gallery/luna.jpg", "caption": "Luna 🐶" },
+      { "path": "assets/gallery/finn.jpg", "caption": "Finn 🐾" }
+    ]
+  }
+}
