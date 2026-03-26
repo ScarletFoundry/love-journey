@@ -219,14 +219,14 @@ def render_sections(
         try:
             eng_date = datetime.datetime.strptime(engagement_str, "%Y-%m-%d").date()
             days_since = (today - eng_date).days
-            engagement_badge = f"![Engaged](https://img.shields.io/badge/Engaged-{days_since}_days-gold?style=flat-square&logo=heart)"
+            engagement_badge = f"![Engaged](https://img.shields.io/badge/Engaged-{days_since}_days-gold?style=for-the-badge&logo=heart)"
         except ValueError:
             pass
 
     # Birthday Badge
     birthday_badge = ""
     if now.month == 8:
-        birthday_badge = f"![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-{accent}?style=flat-square)"
+        birthday_badge = f"![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-{accent}?style=for-the-badge)"
 
     # Build Sections dictionary
     sections = {}
@@ -467,22 +467,33 @@ In January 11, 2026, we joined forces to create **Paper Pulse**—a journey of c
             pass
 
     sections["counter"] = f"""### 🕒 The Counter
+
 <div align="center">
-  <p><b>We have been together for</b></p>
-  <h3>✨ {duration_str} ✨</h3>
-  <br>
-  <p>Next Anniversary Progress</p>
-  {get_progress_bar(progress_percent, width=30)}
-  {countdown_str}
-  <br>
 
-  <p><b>Relationship Status</b></p>
-  ![Jeff](https://img.shields.io/badge/Jeff-{calculate_age(birthdays.get("Jeff", "1997-01-01"), today)}_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-{calculate_age(birthdays.get("Jacqueline", "1999-01-01"), today)}_y.o.-{accent}?style=for-the-badge)
-  <br>
-  {engagement_badge} {birthday_badge}
+**We have been together for**
 
-  <br>
-  <sub><i>Last Updated: {now.strftime("%Y-%m-%d")} UTC</i></sub>
+### ✨ {duration_str} ✨
+
+<br>
+
+**Next Anniversary Progress**
+
+{get_progress_bar(progress_percent, width=30)}
+
+{countdown_str}
+
+<br>
+
+**Relationship Status**
+
+![Jeff](https://img.shields.io/badge/Jeff-{calculate_age(birthdays.get("Jeff", "1997-01-01"), today)}_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-{calculate_age(birthdays.get("Jacqueline", "1999-01-01"), today)}_y.o.-{accent}?style=for-the-badge)
+
+{engagement_badge} {birthday_badge}
+
+<br>
+
+<sub>*Last Updated: {now.strftime("%Y-%m-%d")} UTC*</sub>
+
 </div>"""
 
     # Pets Section

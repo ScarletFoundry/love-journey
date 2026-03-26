@@ -11,29 +11,41 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 ### 📖 Explore Our Journey
 - [🗓️ Detailed Milestones & Gallery](docs/JOURNEY.md)
 - [🎗️ Health Updates & Support](docs/HEALTH.md)
+- [❤️ Support Guestbook](docs/SUPPORT.md)
 - [🎨 Paper Pulse Music Project](docs/PAPER_PULSE.md)
 
 ---
 
 ### 🕒 The Counter
+
 <div align="center">
-  <p><b>We have been together for</b></p>
-  <h3>✨ 11 years, 11 months, 12 days ✨</h3>
-  <br>
-  <p>Next Anniversary Progress</p>
-  `████████████████████████████░░ 94.8%`
-  
+
+**We have been together for**
+
+### ✨ 11 years, 11 months, 12 days ✨
+
+<br>
+
+**Next Anniversary Progress**
+
+`████████████████████████████░░ 94.8%`
+
+
 **⏳ 19 days remaining until our Next Milestone**
 
-  <br>
 
-  <p><b>Relationship Status</b></p>
-  ![Jeff](https://img.shields.io/badge/Jeff-28_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-26_y.o.-FF69B4?style=for-the-badge)
-  <br>
-  ![Engaged](https://img.shields.io/badge/Engaged-599_days-gold?style=flat-square&logo=heart) 
+<br>
 
-  <br>
-  <sub><i>Last Updated: 2026-03-26 UTC</i></sub>
+**Relationship Status**
+
+![Jeff](https://img.shields.io/badge/Jeff-28_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-26_y.o.-FF69B4?style=for-the-badge)
+
+![Engaged](https://img.shields.io/badge/Engaged-599_days-gold?style=for-the-badge&logo=heart) 
+
+<br>
+
+<sub>*Last Updated: 2026-03-26 UTC*</sub>
+
 </div>
 
 ---
