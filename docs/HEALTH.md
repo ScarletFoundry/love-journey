@@ -4,7 +4,7 @@
 
 <p align="center">
 
-![Day 260](https://img.shields.io/badge/Battle_Day-260-red?style=for-the-badge&logo=heartbeat)
+![Day 261](https://img.shields.io/badge/Battle_Day-261-red?style=for-the-badge&logo=heartbeat)
 
 </p>
 
