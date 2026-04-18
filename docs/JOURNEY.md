@@ -92,4 +92,4 @@ timeline
 ---
 
 <p align="center"><a href="#top"><b>Back to Top ↑</b></a></p>
-<p align="center"><sub>Built with ❤️ by Jeff & Jacq | © 2026 Paper Pulse</sub></p>
+<p align="center"><sub>Built with ❤️ by Jeff & Jacq | © 2026 Scarlet Foundry - Skiddle ID</sub></p>
