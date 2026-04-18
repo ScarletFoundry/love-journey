@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '*/15 * * * *'  # Changed to every 15 mins to reduce git noise
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 # Prevents multiple runs from overlapping if a push takes a while
 concurrency:
