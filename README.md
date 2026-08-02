@@ -22,7 +22,7 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 
 **We have been together for**
 
-### ✨ 12 years, 3 months, 18 days ✨
+### ✨ 12 years, 3 months, 19 days ✨
 
 <br>
 
@@ -31,7 +31,7 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 `████████░░░░░░░░░░░░░░░░░░░░░░ 29.9%`
 
 
-**⏳ 256 days remaining until our Next Milestone**
+**⏳ 255 days remaining until our Next Milestone**
 
 
 <br>
@@ -40,11 +40,11 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 
 ![Jeff](https://img.shields.io/badge/Jeff-28_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-26_y.o.-FF69B4?style=for-the-badge)
 
-![Engaged](https://img.shields.io/badge/Engaged-727_days-gold?style=for-the-badge&logo=heart) ![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-FF69B4?style=for-the-badge)
+![Engaged](https://img.shields.io/badge/Engaged-728_days-gold?style=for-the-badge&logo=heart) ![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-FF69B4?style=for-the-badge)
 
 <br>
 
-<sub>*Last Updated: 2026-08-01 UTC*</sub>
+<sub>*Last Updated: 2026-08-02 UTC*</sub>
 
 </div>
 
