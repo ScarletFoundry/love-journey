@@ -2,6 +2,8 @@
 
 # Our Journey Begins...
 
+> ### 🎂 Happy Birthday, Jeff! Wishing you a wonderful 29th year! 🎉
+
 For years, our love story unfolded quietly, a cherished bond known to our immediate families and, most importantly, to the two of us. Today, with full hearts, we are thrilled to share it more widely with the world.
 
 It all started in middle school around 2011, where Laurensius Jeffrey Chandra (Skiddle) and Jacqueline Patravee (Scarletnine) first met. Though high school took us on different paths, our connection remained, and on April 14, 2014, we took the step to build something serious together.
@@ -22,7 +24,7 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 
 **We have been together for**
 
-### ✨ 12 years, 3 months, 25 days ✨
+### ✨ 12 years, 3 months, 26 days ✨
 
 <br>
 
@@ -31,20 +33,20 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 `█████████░░░░░░░░░░░░░░░░░░░░░ 31.8%`
 
 
-**⏳ 249 days remaining until our Next Milestone**
+**⏳ 248 days remaining until our Next Milestone**
 
 
 <br>
 
 **Relationship Status**
 
-![Jeff](https://img.shields.io/badge/Jeff-28_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-27_y.o.-FF69B4?style=for-the-badge)
+![Jeff](https://img.shields.io/badge/Jeff-29_y.o.-blue?style=for-the-badge) ![Jacqueline](https://img.shields.io/badge/Jacqueline-27_y.o.-FF69B4?style=for-the-badge)
 
-![Engaged](https://img.shields.io/badge/Engaged-734_days-gold?style=for-the-badge&logo=heart) ![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-FF69B4?style=for-the-badge)
+![Engaged](https://img.shields.io/badge/Engaged-735_days-gold?style=for-the-badge&logo=heart) ![Birthday](https://img.shields.io/badge/Status-Birthday_Month_🎉-FF69B4?style=for-the-badge)
 
 <br>
 
-<sub>*Last Updated: 2026-08-08 UTC*</sub>
+<sub>*Last Updated: 2026-08-09 UTC*</sub>
 
 </div>
 
