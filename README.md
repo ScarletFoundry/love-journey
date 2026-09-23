@@ -28,7 +28,7 @@ It all started in middle school around 2011, where Laurensius Jeffrey Chandra (S
 
 **Next Anniversary Progress**
 
-`█████████████░░░░░░░░░░░░░░░░░ 44.1%`
+`█████████████░░░░░░░░░░░░░░░░░ 44.4%`
 
 
 **⏳ 203 days remaining until our Next Milestone**
